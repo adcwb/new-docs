@@ -1,0 +1,61 @@
+{{- /*
+  Recent notes — 首页「最近笔记」清单。
+  把最近 6 篇笔记（按 date 倒序）渲染成一份紧凑清单：日期 · 领域色点+领域名 · 标题。
+  领域与色相均反查自 data/atlas.yaml（单一数据源，与星座 Hero 同源）。
+  笔记计数与正文仅存在于中文站，故取自 zh-cn 站点；标题无英文版，两语均显示原标题。
+  纯服务端渲染 + CSS hover，无 JS。上下文 `.` 为 Page。
+
+  领域反查：预建「prefix → domain」索引，再用 index 取值；style 属性里只插来自
+  data/atlas.yaml 的字符串（Hugo 视为可信），避免普通字符串变量触发 ZgotmplZ 转义。
+  领域目录都是 docs/ 下的直接子目录，故每条笔记至多命中一个前缀。
+*/ -}}
+{{- $atlas := hugo.Data.atlas -}}
+{{- $en := eq .Site.Language.Lang "en" -}}
+
+{{- /* 笔记正文仅在中文站，统一取 zh-cn 站点的 RegularPages（与 atlas-hero 计数同源） */ -}}
+{{- $csite := .Site -}}
+{{- range hugo.Sites -}}{{ if eq .Language.Lang "zh-cn" }}{{ $csite = . }}{{ end }}{{ end -}}
+
+{{- /* 预建领域索引：key = "docs/<dir>/"（lower），value = domain map */ -}}
+{{- $byPrefix := dict -}}
+{{- range $atlas.domains -}}
+  {{- $byPrefix = merge $byPrefix (dict (printf "docs/%s/" (lower .dir)) .) -}}
+{{- end -}}
+
+{{- $dateFmt := "2006-01-02" -}}
+
+<section class="atlas-recent" aria-label="{{ cond $en "Recent notes" "最近笔记" }}">
+  <div class="atlas-recent__head">
+    <p class="atlas-recent__eyebrow">{{ cond $en "RECENT NOTES" "最近笔记 · RECENT" }}</p>
+    <a class="atlas-recent__more" href="{{ "/docs/" | relURL }}">{{ cond $en "Browse all →" "查看全部 →" }}</a>
+  </div>
+
+  <ol class="atlas-recent__list">
+    {{- range first 6 $csite.RegularPages.ByDate.Reverse -}}
+      {{- /* .File.Dir 在 Windows 用反斜杠，统一替换为 / 再匹配 */ -}}
+      {{- $fileDir := lower (replace .File.Dir "\\" "/") -}}
+      {{- /* 遍历领域索引，命中即取（至多一个命中） */ -}}
+      {{- $dom := "" -}}
+      {{- range $prefix, $d := $byPrefix -}}
+        {{- if and (eq $dom "") (hasPrefix $fileDir $prefix) -}}
+          {{- $dom = $d -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $hasDom := ne $dom "" -}}
+      <li class="atlas-recent__item"{{ with $dom }} style="--hue: {{ .hue }};"{{ end }}>
+        <a class="atlas-recent__row" href="{{ .RelPermalink }}">
+          <time class="atlas-recent__date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format $dateFmt }}</time>
+          {{- if $hasDom -}}
+            {{- with $dom -}}
+              <span class="atlas-recent__domain">
+                <span class="atlas-recent__dot" aria-hidden="true"></span>
+                <span class="atlas-recent__domain-name">{{ cond $en .name_en .name_zh }}</span>
+              </span>
+            {{- end -}}
+          {{- end -}}
+          <span class="atlas-recent__title">{{ .Title }}</span>
+        </a>
+      </li>
+    {{- end -}}
+  </ol>
+</section>

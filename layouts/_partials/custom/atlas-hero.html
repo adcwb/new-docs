@@ -1,0 +1,401 @@
+{{- /*
+  Knowledge Atlas — 首页签名件。
+  把 data/atlas.yaml 的 11 个领域渲染成一张可交互星座图（SVG，节点=真实链接，
+  键盘可达），下接一份「星表目录」作为无 JS / 窄屏回退与信息密度补充。
+  笔记计数在此实时取得，hover/focus 高亮逻辑由文末作用域 JS 渐进增强。
+  上下文 `.` 为 Page（由 _shortcodes/atlas/hero.html 传入 .Page）。
+*/ -}}
+{{- $atlas := hugo.Data.atlas -}}
+{{- $en := eq .Site.Language.Lang "en" -}}
+
+{{- /* 笔记内容仅存在于中文站，故计数统一取自 zh-cn 站点（两种语言读数一致） */ -}}
+{{- $csite := .Site -}}
+{{- range hugo.Sites -}}{{ if eq .Language.Lang "zh-cn" }}{{ $csite = . }}{{ end }}{{ end -}}
+
+{{- /* 领域按 key 建索引，供连线查坐标；同时实时统计每领域笔记数 */ -}}
+{{- $byKey := dict -}}
+{{- $counts := dict -}}
+{{- $total := 0 -}}
+{{- range $atlas.domains -}}
+  {{- $byKey = merge $byKey (dict .key .) -}}
+  {{- $c := 0 -}}
+  {{- with $csite.GetPage (printf "/docs/%s" .dir) }}{{ $c = len .RegularPagesRecursive }}{{ end -}}
+  {{- $counts = merge $counts (dict .key $c) -}}
+  {{- $total = add $total $c -}}
+{{- end -}}
+
+{{- $notesWord := cond $en "notes" "篇" -}}
+{{- $ctaLink := relURL "/docs/" -}}
+
+<section id="atlas" class="atlas-hero" data-notes="{{ $notesWord }}">
+  <div class="atlas-hero__sky" aria-hidden="true">
+    <svg class="atlas-constellation" viewBox="-12 -12 124 100" preserveAspectRatio="xMaxYMid meet" role="img"
+         aria-label="{{ cond $en "Technical knowledge graph" "技术领域关系图" }}">
+      <g class="atlas-edges">
+        {{- range $atlas.edges -}}
+          {{- $a := index $byKey (index . 0) -}}
+          {{- $b := index $byKey (index . 1) -}}
+          <line class="atlas-edge" data-a="{{ index . 0 }}" data-b="{{ index . 1 }}"
+                x1="{{ $a.x }}" y1="{{ $a.y }}" x2="{{ $b.x }}" y2="{{ $b.y }}" pathLength="1" />
+        {{- end -}}
+      </g>
+      <g class="atlas-nodes">
+        {{- range $atlas.domains -}}
+          {{- $c := index $counts .key -}}
+          {{- $r := add 2.2 (mul 0.14 (math.Min 18 $c)) -}}
+          {{- $name := cond $en .name_en .name_zh -}}
+          {{- $blurb := cond $en .blurb_en .blurb_zh -}}
+          {{- $link := printf "/docs/%s/" (lower .dir) | relURL -}}
+          <g class="atlas-node-float">
+            <a class="atlas-node" href="{{ $link }}" data-key="{{ .key }}"
+               data-name="{{ $name }}" data-count="{{ $c }}" data-blurb="{{ $blurb }}"
+               style="--hue: {{ .hue }};"
+               aria-label="{{ $name }} · {{ $c }} {{ $notesWord }} · {{ $blurb }}">
+              <circle class="atlas-node__halo" cx="{{ .x }}" cy="{{ .y }}" r="{{ add $r 3.2 }}" />
+              <circle class="atlas-node__core" cx="{{ .x }}" cy="{{ .y }}" r="{{ $r }}" />
+              <text class="atlas-node__label" x="{{ .x }}" y="{{ add .y (add $r 4.2) }}" text-anchor="middle">{{ $name }}</text>
+            </a>
+          </g>
+        {{- end -}}
+      </g>
+    </svg>
+  </div>
+
+  <div class="atlas-hero__content">
+    <p class="atlas-hero__eyebrow">{{ cond $en "KNOWLEDGE MAP" "知识图谱 · KNOWLEDGE MAP" }}</p>
+    <h1 class="atlas-hero__title">{{ .Site.Title }}</h1>
+    <p class="atlas-hero__tagline">
+      {{ cond $en
+        "A growing library of technical notes — spanning programming languages, web & data, systems & cloud native, security & AI, with every conclusion backed by a runnable example."
+        "一座持续生长的技术笔记库 —— 覆盖编程语言、Web 与数据、系统与云原生、安全与 AI，先讲清结论与原理，再用可复制的示例验证。" }}
+    </p>
+    <p class="atlas-hero__readout" data-atlas-readout>
+      {{ cond $en
+        "Hover or click a domain to preview — or browse the directory below."
+        "悬停或点击任一领域，查看详情 —— 也可浏览下方目录。" }}
+    </p>
+    <div class="atlas-hero__actions">
+      <a class="atlas-hero__cta" href="{{ $ctaLink }}">{{ cond $en "Start exploring" "开始探索" }} →</a>
+      <span class="atlas-hero__stat"><b>{{ len $atlas.domains }}</b> {{ cond $en "domains" "领域" }} · <b>{{ $total }}</b> {{ $notesWord }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="atlas-catalog" aria-label="{{ cond $en "Domain directory" "领域目录" }}">
+  <p class="atlas-catalog__eyebrow">{{ cond $en "ALL DOMAINS" "全部领域" }}</p>
+  <ol class="atlas-catalog__list">
+    {{- range $i, $d := $atlas.domains -}}
+      {{- $c := index $counts $d.key -}}
+      {{- $name := cond $en $d.name_en $d.name_zh -}}
+      {{- $blurb := cond $en $d.blurb_en $d.blurb_zh -}}
+      {{- $link := printf "/docs/%s/" (lower $d.dir) | relURL -}}
+      <li class="atlas-entry" style="--hue: {{ $d.hue }};">
+        <a href="{{ $link }}">
+          <span class="atlas-entry__idx">§{{ printf "%02d" (add $i 1) }}</span>
+          <span class="atlas-entry__star" aria-hidden="true"></span>
+          <span class="atlas-entry__name">{{ $name }}</span>
+          <span class="atlas-entry__count">{{ $c }} {{ $notesWord }}</span>
+          <span class="atlas-entry__blurb">{{ $blurb }}</span>
+        </a>
+      </li>
+    {{- end -}}
+  </ol>
+</section>
+
+<script>
+/* Knowledge Atlas — 渐进增强：hover/focus 高亮节点+邻接连线，并更新读出区。
+   节点本身是真实链接；无 JS 时关系图与领域目录均可正常浏览。 */
+(function () {
+  var root = document.getElementById('atlas');
+  if (!root) return;
+  var nodes = Array.prototype.slice.call(root.querySelectorAll('.atlas-node'));
+  var edges = Array.prototype.slice.call(root.querySelectorAll('.atlas-edge'));
+  var readout = root.querySelector('[data-atlas-readout]');
+  var notesWord = root.getAttribute('data-notes') || '';
+  var def = readout ? readout.textContent : '';
+  var adj = {};
+  edges.forEach(function (e) {
+    var a = e.getAttribute('data-a'), b = e.getAttribute('data-b');
+    (adj[a] = adj[a] || {})[b] = 1;
+    (adj[b] = adj[b] || {})[a] = 1;
+  });
+  function activate(node) {
+    var key = node.getAttribute('data-key');
+    root.classList.add('is-focused');
+    nodes.forEach(function (n) {
+      var k = n.getAttribute('data-key');
+      n.classList.toggle('is-active', k === key);
+      n.classList.toggle('is-near', !!(adj[key] && adj[key][k]));
+    });
+    edges.forEach(function (e) {
+      e.classList.toggle('is-lit', e.getAttribute('data-a') === key || e.getAttribute('data-b') === key);
+    });
+    if (readout) {
+      readout.textContent = '';
+      readout.style.setProperty('--hue', node.style.getPropertyValue('--hue'));
+      var nm = document.createElement('b'); nm.className = 'atlas-readout__name'; nm.textContent = node.getAttribute('data-name');
+      var ct = document.createElement('span'); ct.className = 'atlas-readout__count'; ct.textContent = node.getAttribute('data-count') + ' ' + notesWord;
+      var bl = document.createElement('span'); bl.className = 'atlas-readout__blurb'; bl.textContent = node.getAttribute('data-blurb');
+      readout.appendChild(nm); readout.appendChild(ct); readout.appendChild(bl);
+    }
+  }
+  function reset() {
+    root.classList.remove('is-focused');
+    nodes.forEach(function (n) { n.classList.remove('is-active', 'is-near'); });
+    edges.forEach(function (e) { e.classList.remove('is-lit'); });
+    if (readout) { readout.textContent = def; readout.style.removeProperty('--hue'); }
+  }
+
+  var resetTimeoutId;
+  nodes.forEach(function (n) {
+    n.addEventListener('mouseenter', function () { clearTimeout(resetTimeoutId); activate(n); });
+    n.addEventListener('focus', function () { clearTimeout(resetTimeoutId); activate(n); });
+    n.addEventListener('mouseleave', reset);
+    n.addEventListener('blur', reset);
+  });
+
+  /* 空闲时自动轮播高亮各领域，让图保持活跃感 */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var autoIdx = 0, autoPaused = false, autoHandle, autoInitHandle;
+    var autoOrder = nodes.slice();
+    for (var i = autoOrder.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = autoOrder[i]; autoOrder[i] = autoOrder[j]; autoOrder[j] = tmp;
+    }
+    function stepAuto() {
+      if (autoPaused) return;
+      activate(autoOrder[autoIdx % autoOrder.length]);
+      autoIdx++;
+      resetTimeoutId = setTimeout(function () { if (!autoPaused) reset(); }, 2200);
+    }
+    function startAuto() {
+      clearInterval(autoHandle);
+      clearTimeout(autoInitHandle);
+      autoHandle = setInterval(stepAuto, 3600);
+      autoInitHandle = setTimeout(stepAuto, 500);
+    }
+    root.addEventListener('mouseenter', function () {
+      autoPaused = true;
+      clearInterval(autoHandle);
+      clearTimeout(autoInitHandle);
+      clearTimeout(resetTimeoutId);
+      reset();
+    });
+    root.addEventListener('mouseleave', function () {
+      autoPaused = false;
+      startAuto();
+    });
+    setTimeout(startAuto, 1800);
+  }
+})();
+
+/* 动画 + 拖拽 — 纯视觉层，不影响内容可访问性。
+   两种拖拽：抓住某个星点 → 单独拖动该星（连线/粒子实时跟随）；
+            抓住空白星空 → 平移整张图（带释放惯性）。 */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var svg = document.querySelector('.atlas-constellation');
+  if (!svg) return;
+
+  /* 客户端坐标 → SVG 用户坐标（自动兼顾 viewBox 与 preserveAspectRatio） */
+  function toSvg(clientX, clientY) {
+    var pt = svg.createSVGPoint();
+    pt.x = clientX; pt.y = clientY;
+    var m = svg.getScreenCTM();
+    if (!m) return { x: 0, y: 0 };
+    var p = pt.matrixTransform(m.inverse());
+    return { x: p.x, y: p.y };
+  }
+
+  /* ── 节点状态：核心/光晕/标签坐标 + 浮动 + 冻结标志（拖动时冻结该点） ── */
+  var nodeEls = Array.prototype.slice.call(svg.querySelectorAll('.atlas-node'));
+  var lineEls = Array.prototype.slice.call(svg.querySelectorAll('.atlas-edge'));
+  var nodeState = {};
+  var floats = nodeEls.map(function (a, i) {
+    var key = a.getAttribute('data-key');
+    var core = a.querySelector('.atlas-node__core');
+    var halo = a.querySelector('.atlas-node__halo');
+    var label = a.querySelector('.atlas-node__label');
+    var cx = +core.getAttribute('cx'), cy = +core.getAttribute('cy');
+    nodeState[key] = {
+      core: core, halo: halo, label: label,
+      labelDx: +label.getAttribute('x') - cx,
+      labelDy: +label.getAttribute('y') - cy,
+      x: cx, y: cy
+    };
+    return {
+      key: key,
+      g: a.parentNode, /* <g class="atlas-node-float"> */
+      amp: 1.0 + Math.random() * 0.8,
+      period: 4200 + Math.random() * 2800,
+      phase: (i / Math.max(1, nodeEls.length)) * Math.PI * 2,
+      lastDy: 0,
+      frozen: false
+    };
+  });
+
+  /* 连线端点索引：key → [{line, end}]，拖动节点时实时改写端点 */
+  var edgeIndex = {};
+  lineEls.forEach(function (ln) {
+    var a = ln.getAttribute('data-a'), b = ln.getAttribute('data-b');
+    (edgeIndex[a] = edgeIndex[a] || []).push({ line: ln, end: 1 });
+    (edgeIndex[b] = edgeIndex[b] || []).push({ line: ln, end: 2 });
+  });
+
+  function moveNode(key, nx, ny) {
+    var s = nodeState[key];
+    if (!s) return;
+    s.x = nx; s.y = ny;
+    s.core.setAttribute('cx', nx); s.core.setAttribute('cy', ny);
+    s.halo.setAttribute('cx', nx); s.halo.setAttribute('cy', ny);
+    s.label.setAttribute('x', nx + s.labelDx);
+    s.label.setAttribute('y', ny + s.labelDy);
+    (edgeIndex[key] || []).forEach(function (e) {
+      e.line.setAttribute('x' + e.end, nx);
+      e.line.setAttribute('y' + e.end, ny);
+    });
+  }
+
+  /* ── 粒子流：端点每帧实时取自 line，自动跟随被拖动的节点 ── */
+  var pg = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  pg.setAttribute('aria-hidden', 'true');
+  svg.appendChild(pg);
+  var particles = [];
+  lineEls.forEach(function (ln) {
+    var x1 = +ln.getAttribute('x1'), y1 = +ln.getAttribute('y1');
+    var x2 = +ln.getAttribute('x2'), y2 = +ln.getAttribute('y2');
+    var d = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    var dur = (d / (9 + Math.random() * 6)) * 1000;
+    var n = d > 22 ? 2 : 1;
+    for (var k = 0; k < n; k++) {
+      var el = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      el.setAttribute('r', '0.9');
+      el.setAttribute('class', 'atlas-particle');
+      pg.appendChild(el);
+      particles.push({ el: el, line: ln, dur: dur, phase: (k / n) * dur });
+    }
+  });
+
+  /* ── 拖拽控制 ── */
+  var vbX = -12, vbY = -12, vbW = 124, vbH = 100; /* 与 HTML viewBox 同步 */
+  function setVB() { svg.setAttribute('viewBox', vbX + ' ' + vbY + ' ' + vbW + ' ' + vbH); }
+
+  var mode = null, activePtId = null, moved = false;
+  var dragKey = null, dragOffX = 0, dragOffY = 0, dragFloat = null;
+  var panStartX, panStartY, panStartVbX, panStartVbY;
+  var velX = 0, velY = 0, lastCX = 0, lastCY = 0, lastT = 0, momentumId;
+
+  svg.addEventListener('pointerdown', function (e) {
+    if (activePtId !== null) return;
+    cancelAnimationFrame(momentumId);
+    activePtId = e.pointerId;
+    svg.setPointerCapture(e.pointerId);
+    moved = false;
+    var anchor = e.target.closest ? e.target.closest('.atlas-node') : null;
+    if (anchor) {
+      /* 单点拖动 */
+      mode = 'node';
+      dragKey = anchor.getAttribute('data-key');
+      dragFloat = null;
+      for (var i = 0; i < floats.length; i++) { if (floats[i].key === dragKey) { dragFloat = floats[i]; break; } }
+      var s = nodeState[dragKey];
+      /* 把当前浮动位移并入坐标后冻结浮动，避免抓取瞬间跳动 */
+      if (dragFloat) {
+        if (dragFloat.lastDy) moveNode(dragKey, s.x, s.y + dragFloat.lastDy);
+        dragFloat.frozen = true;
+        dragFloat.g.removeAttribute('transform');
+      }
+      var p = toSvg(e.clientX, e.clientY);
+      dragOffX = p.x - s.x; dragOffY = p.y - s.y;
+    } else {
+      /* 平移整图 */
+      mode = 'pan';
+      panStartX = e.clientX; panStartY = e.clientY;
+      panStartVbX = vbX; panStartVbY = vbY;
+      velX = 0; velY = 0;
+      lastCX = e.clientX; lastCY = e.clientY; lastT = performance.now();
+    }
+    svg.classList.add('is-dragging');
+  });
+
+  svg.addEventListener('pointermove', function (e) {
+    if (e.pointerId !== activePtId) return;
+    if (mode === 'node') {
+      var p = toSvg(e.clientX, e.clientY);
+      var nx = p.x - dragOffX, ny = p.y - dragOffY;
+      var s = nodeState[dragKey];
+      if (!moved && (Math.abs(nx - s.x) + Math.abs(ny - s.y)) > 0.6) moved = true;
+      moveNode(dragKey, nx, ny);
+    } else if (mode === 'pan') {
+      var now = performance.now();
+      var dt = Math.max(1, now - lastT);
+      var r = svg.getBoundingClientRect();
+      var dx = (e.clientX - panStartX) * vbW / r.width;
+      var dy = (e.clientY - panStartY) * vbH / r.height;
+      var dvx = (e.clientX - lastCX) * vbW / r.width;
+      var dvy = (e.clientY - lastCY) * vbH / r.height;
+      if (!moved && (Math.abs(dx) + Math.abs(dy)) > 1.2) moved = true;
+      velX = dvx / dt; velY = dvy / dt;
+      lastCX = e.clientX; lastCY = e.clientY; lastT = now;
+      vbX = panStartVbX - dx; vbY = panStartVbY - dy;
+      setVB();
+    }
+  });
+
+  function momentumStep() {
+    velX *= 0.87; velY *= 0.87;
+    if (Math.abs(velX) < 0.0015 && Math.abs(velY) < 0.0015) return;
+    vbX -= velX * 16; vbY -= velY * 16;
+    setVB();
+    momentumId = requestAnimationFrame(momentumStep);
+  }
+
+  function endDrag(e) {
+    if (e.pointerId !== activePtId) return;
+    try { svg.releasePointerCapture(e.pointerId); } catch (err) {}
+    svg.classList.remove('is-dragging');
+    if (mode === 'node' && dragFloat) dragFloat.frozen = false; /* 以新坐标为基线继续浮动 */
+    if (mode === 'pan' && moved) momentumId = requestAnimationFrame(momentumStep);
+    mode = null; activePtId = null; dragKey = null; dragFloat = null;
+  }
+  svg.addEventListener('pointerup', endDrag);
+  svg.addEventListener('pointercancel', endDrag);
+
+  /* 拖动超过阈值时阻止链接跳转（纯点击仍正常导航） */
+  svg.addEventListener('click', function (e) {
+    if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+  }, true);
+
+  /* ── 主 RAF 循环：IntersectionObserver 离屏暂停省 GPU ── */
+  var paused = false;
+  var io = new IntersectionObserver(function (en) { paused = !en[0].isIntersecting; }, { threshold: 0 });
+  io.observe(svg.parentElement || svg);
+
+  var t0 = null;
+  function frame(ts) {
+    if (!paused) {
+      if (!t0) t0 = ts;
+      var now = ts - t0;
+      /* 浮动：对未冻结的节点施加 SVG 坐标系 translate */
+      floats.forEach(function (f) {
+        if (f.frozen) return;
+        var dy = Math.sin((now / f.period) * Math.PI * 2 + f.phase) * f.amp;
+        f.lastDy = dy;
+        f.g.setAttribute('transform', 'translate(0,' + dy.toFixed(3) + ')');
+      });
+      /* 粒子：端点实时读取，自动跟随被拖动的节点 */
+      particles.forEach(function (p) {
+        var x1 = +p.line.getAttribute('x1'), y1 = +p.line.getAttribute('y1');
+        var x2 = +p.line.getAttribute('x2'), y2 = +p.line.getAttribute('y2');
+        var t = ((now + p.phase) % p.dur) / p.dur;
+        p.el.setAttribute('cx', (x1 + (x2 - x1) * t).toFixed(2));
+        p.el.setAttribute('cy', (y1 + (y2 - y1) * t).toFixed(2));
+      });
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* draw-in 动画结束后启动 */
+  setTimeout(function () { requestAnimationFrame(frame); }, 1200);
+})();
+</script>

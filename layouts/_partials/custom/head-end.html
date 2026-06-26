@@ -1,0 +1,20 @@
+{{- /* Knowledge Atlas — preload self-hosted Latin webfonts (Inter body,
+       JetBrains Mono code/labels, Space Grotesk display). Files live in
+       /static/fonts, served at /fonts/...; @font-face is in assets/css/custom.css.
+       CJK uses the system stack, so no CJK webfont ships. */ -}}
+<link rel="preload" href="{{ "fonts/inter-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="{{ "fonts/jetbrains-mono-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="{{ "fonts/space-grotesk-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin />
+
+{{- /* Per-domain region accent: match the current page's logical path against
+       data/atlas.yaml and set --page-accent server-side (no flash, no baseof
+       copy). Drives sidebar/TOC active, prose links, inline & block code edges. */ -}}
+{{- with .Path -}}
+  {{- $p := . -}}
+  {{- range hugo.Data.atlas.domains -}}
+    {{- $slug := lower .dir -}}
+    {{- if or (eq $p (printf "/docs/%s" $slug)) (hasPrefix $p (printf "/docs/%s/" $slug)) -}}
+      <style>:root{--page-accent:{{ .hue }};}</style>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

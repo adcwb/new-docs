@@ -1,0 +1,44 @@
+# ============================================================================
+# Knowledge Atlas — 星图数据源 (single source of truth)
+# 供三处共用：首页星座 Hero、星表目录、内页 --page-accent 注入。
+#   - domains: 11 个技术领域（按 content/docs 下 _index.md 的 weight 排序）。
+#     · key     程序内标识，也用于 edges 互连
+#     · dir     content/docs 下真实目录名，用于 URL 推导与笔记计数匹配
+#     · hue     该领域色相（地图上的「疆域色」）
+#     · x / y   星座坐标，落在 viewBox "0 0 100 56" 上，按语义聚类手工摆放：
+#               数据簇(左) python·data·db | Web/服务簇(中) web·php·golang
+#               系统/基础设施簇(右) rust·linux·cloud·network·security
+#   - edges: 领域间的真实知识关联（星座连线），每条是一对 key。
+# 笔记计数在构建时实时取得，不在此硬编码。
+# ============================================================================
+domains:
+  - { key: python,   dir: "软件开发/Python开发", name_zh: "Python",   name_en: "Python",       hue: "#3b82f6", x: 22, y: 16, blurb_zh: "语言基础、Web 框架、自动化与工程实践", blurb_en: "Fundamentals, web frameworks, automation" }
+  - { key: golang,   dir: "软件开发/Golang开发", name_zh: "Golang",   name_en: "Go",           hue: "#22d3ee", x: 58, y: 42, blurb_zh: "并发模型、标准库与高性能服务",          blurb_en: "Concurrency, stdlib, high-performance services" }
+  - { key: rust,     dir: "软件开发/Rust开发",   name_zh: "Rust",     name_en: "Rust",         hue: "#f97316", x: 80, y: 16, blurb_zh: "所有权与生命周期、内存安全与系统编程",  blurb_en: "Ownership, memory safety, systems programming" }
+  - { key: php,      dir: "软件开发/PHP开发",    name_zh: "PHP",      name_en: "PHP",          hue: "#8b8cf6", x: 40, y: 56, blurb_zh: "语言特性、常用框架与 Web 后端",        blurb_en: "Language, frameworks, web backends" }
+  - { key: web,      dir: "软件开发/Web开发",    name_zh: "Web",      name_en: "Web",          hue: "#10b981", x: 46, y: 24, blurb_zh: "前端工程、HTTP 协议与接口设计",        blurb_en: "Frontend, HTTP, API design" }
+  - { key: db,       dir: "数据库",     name_zh: "数据库",   name_en: "Databases",    hue: "#a855f7", x: 26, y: 60, blurb_zh: "MySQL / PostgreSQL 设计、调优与索引",  blurb_en: "MySQL / PostgreSQL design, tuning, indexing" }
+  - { key: data,     dir: "数据分析",   name_zh: "数据分析", name_en: "Data",         hue: "#ec4899", x: 10, y: 38, blurb_zh: "数据清洗、可视化与分析方法论",          blurb_en: "Cleaning, visualization, analysis methods" }
+  - { key: linux,    dir: "系统管理/Linux系统",  name_zh: "Linux",    name_en: "Linux",        hue: "#f59e0b", x: 82, y: 46, blurb_zh: "系统服务、Shell、网络与运维排障",      blurb_en: "Services, shell, networking, ops" }
+  - { key: cloud,    dir: "系统管理/云原生",     name_zh: "云原生",   name_en: "Cloud Native", hue: "#0ea5e9", x: 64, y: 70, blurb_zh: "Kubernetes、容器编排与可观测性",       blurb_en: "Kubernetes, orchestration, observability" }
+  - { key: network,  dir: "网络技术/网络技术",   name_zh: "网络技术", name_en: "Networking",   hue: "#14b8a6", x: 92, y: 30, blurb_zh: "TCP/IP、协议分析与网络排障",           blurb_en: "TCP/IP, protocols, troubleshooting" }
+  - { key: security, dir: "网络技术/安全",       name_zh: "安全",     name_en: "Security",     hue: "#f43f5e", x: 86, y: 66, blurb_zh: "Web 安全、攻防实践与系统加固",         blurb_en: "Web security, offense & hardening" }
+  - { key: ai,       dir: "人工智能",   name_zh: "人工智能", name_en: "AI",           hue: "#7c3aed", x: 32, y: 30, blurb_zh: "机器学习、大模型与工程化落地",         blurb_en: "Machine learning, LLMs, applied practice" }
+
+edges:
+  - [python, data]
+  - [python, web]
+  - [data, db]
+  - [db, web]
+  - [db, php]
+  - [php, web]
+  - [web, golang]
+  - [golang, cloud]
+  - [cloud, linux]
+  - [linux, network]
+  - [linux, rust]
+  - [network, security]
+  - [cloud, security]
+  - [ai, python]
+  - [ai, data]
+  - [ai, cloud]

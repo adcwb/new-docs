@@ -1,0 +1,42 @@
+{{- /*
+Project override of Hextra's callout shortcode.
+Emits a stable `.hextra-callout` element with a `data-callout` tone hook so the
+redesign (assets/css/custom.css) can apply the flat hairline + left-accent-bar
+treatment. Tones: note / tip / important / warning / caution.
+
+Backwards-compatible type aliases keep existing content working:
+  default -> tip, info -> note, error -> caution.
+
+@example {{< callout type="warning" >}}Content{{< /callout >}}
+*/ -}}
+
+{{- $type := .Get "type" | default "note" -}}
+{{- $aliases := dict "default" "tip" "info" "note" "error" "caution" -}}
+{{- $tone := index $aliases $type | default $type -}}
+
+{{- $icons := dict
+  "note" "information-circle"
+  "tip" "light-bulb"
+  "important" "exclamation-circle"
+  "warning" "exclamation"
+  "caution" "ban"
+-}}
+
+{{- $emoji := .Get "emoji" -}}
+{{- $icon := .Get "icon" | default (index $icons $tone) -}}
+{{- $content := .InnerDeindent | markdownify -}}
+
+<div class="hextra-callout" data-callout="{{ $tone }}">
+  <div class="hextra-callout-icon" aria-hidden="true">
+    {{- with $emoji -}}
+      <span class="hextra-callout-emoji">{{ . }}</span>
+    {{- else -}}
+      {{- with $icon -}}
+        {{ partial "utils/icon.html" (dict "name" . "attributes" `height=1.15em`) -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+  <div class="hextra-callout-content">
+    {{- $content -}}
+  </div>
+</div>

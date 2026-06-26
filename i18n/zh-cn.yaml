@@ -1,0 +1,5 @@
+# 项目级 i18n 覆盖（优先于主题 themes/hextra/i18n/zh-cn.yaml）
+# 仅覆盖需要自定义的键，其余仍使用主题默认值。
+
+# 页脚版权（作者信息）
+copyright: "© 2026 adcwb. All rights reserved."

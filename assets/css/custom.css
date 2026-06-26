@@ -1,0 +1,869 @@
+/* ============================================================================
+   Knowledge Atlas — custom override
+   ----------------------------------------------------------------------------
+   把站点重塑为「知识星图」：站点本质是一张「我在学什么」的地图，11 个技术领域
+   是星座节点，领域间的真实关联是连线。冷色「午夜星空」画布 × 暖色「北极星」金 的
+   冷暖张力，叠加每个领域各自的「疆域色」(--page-accent，由 head-end 按页面注入)。
+
+   策略：沿用 Hextra 的接线 —— 本文件在主题编译 CSS 之后加载，普通选择器即可压过
+   主题的 @layer Tailwind 规则，无需 !important。暗色为参考基准，亮色由其推导。
+   字体全部自托管(中国大陆可达)，CJK 走系统栈。签名件首页星座见
+   layouts/_partials/custom/atlas-hero.html。
+   ========================================================================== */
+
+/* ============================ Web fonts (self-hosted) ==================== */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+/* Display face — geometric, faintly "space"; used with restraint on headings.
+   No CJK glyphs, so Chinese headings fall through to the system CJK stack. */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+/* ============================ Design tokens ============================== */
+:root {
+  --font-display: "Space Grotesk", "PingFang SC", "Microsoft YaHei",
+    "Noto Sans SC", system-ui, sans-serif;
+  --font-sans: "Inter", "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+    system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "SFMono-Regular", Consolas,
+    monospace;
+
+  /* Canvas — light = a cool star-chart on paper (not cream) */
+  --atlas-bg: #f4f6fc;
+  --atlas-panel: #ffffff;
+  --atlas-ink: #141a2c;
+  --atlas-dust: #5b647e; /* muted text / star dust */
+  --atlas-line: rgba(20, 26, 44, 0.1); /* hairlines & faint edges */
+
+  /* North-star gold — the one warm interactive accent (CTA fill, "you are here") */
+  --atlas-guide: #f5c451;
+  --atlas-guide-deep: #b07d12; /* gold as text/border on a light bg */
+
+  /* Region accent — overridden per domain by custom/head-end.html injection */
+  --page-accent: #3b6cf5;
+  --rd-link: color-mix(in srgb, var(--page-accent) 80%, #0a0e1a);
+
+  /* Hextra derives its primary-50..900 ramp from these three HSL channels.
+     Kept a cool azure so any theme chrome (rings, stray filled buttons) stays
+     legible with white text — gold is applied by our own selectors only. */
+  --primary-hue: 222deg;
+  --primary-saturation: 83%;
+  --primary-lightness: 56%;
+
+  --rd-radius: 10px;
+  --rd-radius-lg: 16px;
+  --rd-leading-prose: 1.8;
+}
+
+.dark {
+  --atlas-bg: #0a0e1a;
+  --color-dark: #0a0e1a; /* Hextra dark canvas */
+  --atlas-panel: #0f1426;
+  --atlas-ink: #e8ecfb;
+  --atlas-dust: #97a0bf;
+  --atlas-line: rgba(160, 180, 230, 0.12);
+  --atlas-guide-deep: #f5c451; /* gold reads bright enough on the void */
+
+  --page-accent: #6e8bff;
+  --rd-link: color-mix(in srgb, var(--page-accent) 78%, #ffffff);
+
+  --primary-hue: 222deg;
+  --primary-saturation: 92%;
+  --primary-lightness: 68%;
+}
+
+/* ============================ Canvas & ambient ========================== */
+/* Ambient field on every page — layered low-opacity nebulae + a faint star-grid
+   so the canvas never reads as one flat fill, yet stays calm under long-form
+   prose. Fixed attachment keeps it as a backdrop while content scrolls over it. */
+body {
+  background-color: var(--atlas-bg);
+  background-image: radial-gradient(
+      62% 48% at 88% -4%,
+      color-mix(in srgb, var(--page-accent) 8%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      52% 42% at -6% 102%,
+      color-mix(in srgb, var(--atlas-guide) 7%, transparent),
+      transparent 58%
+    );
+  background-attachment: fixed;
+}
+/* faint nebula so the void never reads as flat black; deeper in the dark */
+.dark body {
+  background-image: radial-gradient(
+      72% 56% at 88% -4%,
+      color-mix(in srgb, var(--page-accent) 14%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      60% 48% at -6% 102%,
+      color-mix(in srgb, var(--atlas-guide) 8%, transparent),
+      transparent 56%
+    );
+}
+
+/* ============================ Typography base =========================== */
+html,
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "cv05" 1, "ss01" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+code,
+pre,
+kbd,
+samp,
+.hextra-code-block code,
+.hextra-code-block pre {
+  font-family: var(--font-mono);
+  font-feature-settings: "calt" 1, "liga" 1;
+}
+
+/* Display face on real headings (sidebar/nav are not h-tags, so they're safe) */
+main :where(h1, h2, h3),
+.atlas-hero__title,
+.atlas-entry__name {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Prose reading rhythm — the docs page is where time is spent */
+.content :where(p, li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  line-height: var(--rd-leading-prose);
+}
+.content :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  text-wrap: pretty;
+}
+:lang(zh-CN) .content,
+:lang(zh) .content {
+  letter-spacing: 0.01em;
+}
+.content :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  text-wrap: balance;
+}
+.content :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  padding-bottom: 0.35rem;
+}
+
+/* Prose links — domain-tinted, with a gold underline that warms on hover */
+.content
+  :where(a):not(
+    :where(
+        [class~="not-prose"],
+        [class~="not-prose"] *,
+        .subheading-anchor,
+        .hextra-feature-card,
+        .hextra-card
+      )
+  ) {
+  color: var(--rd-link);
+  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+.content
+  :where(a):not(
+    :where(
+        [class~="not-prose"],
+        [class~="not-prose"] *,
+        .subheading-anchor,
+        .hextra-feature-card,
+        .hextra-card
+      )
+  ):hover {
+  text-decoration-color: var(--atlas-guide);
+}
+
+/* Inline code — soft region wash, keeps CJK tokens from breaking mid-word */
+.content
+  :where(code):not(
+    :where(.hextra-code-block code, [class~="not-prose"], [class~="not-prose"] *)
+  ) {
+  background: color-mix(in srgb, var(--page-accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--page-accent) 20%, transparent);
+  color: var(--rd-link);
+  word-break: keep-all;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--atlas-guide) 30%, transparent);
+}
+
+/* ============================ Code blocks ============================== */
+/* "Observation log": hairline panel with a thin region-accent top edge */
+.hextra-code-block {
+  border-radius: var(--rd-radius);
+  border: 1px solid var(--atlas-line);
+  border-top: 2px solid color-mix(in srgb, var(--page-accent) 60%, transparent);
+  overflow: hidden;
+}
+.hextra-code-block pre {
+  border-radius: 0 !important;
+}
+.hextra-code-block .code-block-filename {
+  border-bottom: 1px solid var(--atlas-line);
+  font-family: var(--font-mono);
+}
+
+/* ============================ Callouts ================================= */
+/* The {{< callout >}} shortcode emits .hextra-callout[data-callout]; flat
+   hairline + left accent bar, keyed by tone. */
+.hextra-callout {
+  --tone: #3b82f6;
+  display: flex;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: var(--rd-radius);
+  border: 1px solid color-mix(in srgb, var(--tone) 30%, transparent);
+  border-left: 3px solid var(--tone);
+  background: color-mix(in srgb, var(--tone) 8%, var(--atlas-panel));
+  line-height: 1.7;
+}
+.dark .hextra-callout {
+  background: color-mix(in srgb, var(--tone) 14%, var(--color-dark));
+}
+.hextra-callout[data-callout="note"] { --tone: #3b82f6; }
+.hextra-callout[data-callout="tip"] { --tone: #10b981; }
+.hextra-callout[data-callout="important"] { --tone: #8b5cf6; }
+.hextra-callout[data-callout="warning"] { --tone: #f59e0b; }
+.hextra-callout[data-callout="caution"] { --tone: #f43f5e; }
+.dark .hextra-callout[data-callout="note"] { --tone: #60a5fa; }
+.dark .hextra-callout[data-callout="tip"] { --tone: #34d399; }
+.dark .hextra-callout[data-callout="important"] { --tone: #a78bfa; }
+.dark .hextra-callout[data-callout="warning"] { --tone: #fbbf24; }
+.dark .hextra-callout[data-callout="caution"] { --tone: #fb7185; }
+.hextra-callout-icon {
+  flex: none;
+  color: var(--tone);
+  margin-top: 0.15rem;
+  line-height: 1;
+}
+.hextra-callout-content { min-width: 0; }
+.hextra-callout-content > :first-child { margin-top: 0; }
+.hextra-callout-content > :last-child { margin-bottom: 0; }
+
+/* Hextra's native GFM alerts — keep them visually in sync */
+.hextra-alert {
+  --tone: #3b82f6;
+  border-radius: var(--rd-radius);
+  border: 1px solid color-mix(in srgb, var(--tone) 30%, transparent);
+  border-left: 3px solid var(--tone);
+  background: color-mix(in srgb, var(--tone) 8%, var(--atlas-panel));
+}
+.dark .hextra-alert {
+  background: color-mix(in srgb, var(--tone) 14%, var(--color-dark));
+}
+.hextra-alert[data-alert="note"] { --tone: #3b82f6; }
+.hextra-alert[data-alert="tip"] { --tone: #10b981; }
+.hextra-alert[data-alert="important"] { --tone: #8b5cf6; }
+.hextra-alert[data-alert="warning"] { --tone: #f59e0b; }
+.hextra-alert[data-alert="caution"] { --tone: #f43f5e; }
+.hextra-alert .hextra-alert-icon,
+.hextra-alert-title { color: var(--tone); }
+
+/* ============================ Sidebar nav ============================== */
+/* Active item: region-tinted well + region edge bar; the gold "you are here"
+   marker lives on the TOC so the two reading rails read differently. */
+.hextra-sidebar-container a.hextra-sidebar-active-item {
+  background: color-mix(in srgb, var(--page-accent) 14%, transparent) !important;
+  box-shadow: inset 2px 0 0 var(--page-accent);
+  color: color-mix(in srgb, var(--page-accent) 70%, var(--atlas-ink)) !important;
+  font-weight: 600;
+}
+
+/* ============================ Right-hand TOC =========================== */
+.hextra-toc a {
+  border-left: 2px solid transparent;
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+.hextra-toc a.hextra-toc-active {
+  border-left-color: var(--atlas-guide); /* north-star gold = current heading */
+  color: color-mix(in srgb, var(--page-accent) 72%, var(--atlas-ink)) !important;
+  font-weight: 600;
+}
+
+/* ============================ Buttons ================================= */
+a.hextra-focus-visible[class*="bg-primary-600"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px color-mix(in srgb, hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness)) 35%, transparent);
+}
+
+/* generic Hextra cards (used inside docs) keep the larger radius */
+.hextra-card,
+.hextra-feature-card { border-radius: var(--rd-radius-lg); }
+
+/* Tables — quiet uppercase header */
+.content
+  :where(table thead th):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  ) {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  color: var(--atlas-dust);
+}
+.hextra-steps > h3::before,
+.hextra-steps :where(h3)::before {
+  border-color: color-mix(in srgb, var(--page-accent) 50%, transparent);
+}
+
+/* ============================================================================
+   SIGNATURE — Homepage constellation hero (+ star catalog)
+   ========================================================================== */
+/* Home only: let the hero span the content column edge-to-edge */
+body:has(#atlas) main {
+  padding: 0 !important;
+}
+
+.atlas-hero {
+  position: relative;
+  width: 100%;
+  min-height: min(80vh, 720px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(
+      120% 95% at 72% 30%,
+      color-mix(in srgb, var(--page-accent) 16%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      80% 70% at 10% 80%,
+      color-mix(in srgb, var(--atlas-guide) 7%, transparent),
+      transparent 60%
+    ),
+    var(--atlas-bg);
+}
+/* The constellation is now a full-bleed layer (not a grid cell), so dragging
+   pans the stars clear across the hero — including behind the headline. */
+.atlas-hero__sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100%;
+  min-height: 360px;
+}
+/* Veil: a left-anchored scrim sitting *above* the sky but *below* the text.
+   Anything the user drags into the text zone slides under it and reads as
+   "dimmed", so the copy stays legible without ever clipping the stars.
+   pointer-events:none lets drags begin anywhere on the open sky. */
+.atlas-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    104deg,
+    color-mix(in srgb, var(--atlas-bg) 90%, transparent) 0%,
+    color-mix(in srgb, var(--atlas-bg) 78%, transparent) 20%,
+    color-mix(in srgb, var(--atlas-bg) 42%, transparent) 38%,
+    transparent 56%
+  );
+}
+/* faint star-dust so the sky reads as a sky even between the named stars */
+.atlas-hero__sky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.7;
+  background-image: radial-gradient(1.2px 1.2px at 18% 26%, var(--atlas-dust), transparent),
+    radial-gradient(1px 1px at 64% 14%, var(--atlas-dust), transparent),
+    radial-gradient(1.4px 1.4px at 84% 58%, var(--atlas-dust), transparent),
+    radial-gradient(1px 1px at 32% 72%, var(--atlas-dust), transparent),
+    radial-gradient(1px 1px at 50% 48%, var(--atlas-dust), transparent),
+    radial-gradient(1.2px 1.2px at 8% 54%, var(--atlas-dust), transparent),
+    radial-gradient(1px 1px at 90% 84%, var(--atlas-dust), transparent),
+    radial-gradient(1px 1px at 74% 38%, var(--atlas-dust), transparent);
+}
+.atlas-constellation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.atlas-constellation.is-dragging { cursor: grabbing; }
+
+.atlas-hero__content {
+  position: relative;
+  z-index: 2; /* above the veil; copy stays crisp over the drifting stars */
+  width: min(46rem, 100%);
+  max-width: 46rem;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 3vw, 2rem)
+    clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+}
+.atlas-hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atlas-guide-deep);
+  margin: 0;
+}
+.atlas-hero__title {
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  color: var(--atlas-ink);
+  margin: 0.5rem 0 0;
+}
+.atlas-hero__tagline {
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.7;
+  color: var(--atlas-dust);
+  margin: 1.1rem 0 0;
+}
+.atlas-hero__readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.85rem;
+  min-height: 3.4em;
+  margin: 1.5rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 2px solid color-mix(in srgb, var(--hue, var(--atlas-line)) 60%, var(--atlas-line));
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--atlas-dust);
+  transition: border-color 0.2s ease;
+}
+.atlas-readout__name { color: var(--atlas-ink); font-weight: 700; }
+.atlas-readout__count { color: var(--hue); font-weight: 600; }
+.atlas-readout__blurb { flex-basis: 100%; color: var(--atlas-dust); }
+
+.atlas-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.4rem;
+  margin-top: 1.8rem;
+}
+.atlas-hero__cta {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #16130a;
+  background: var(--atlas-guide);
+  padding: 0.7rem 1.45rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--atlas-guide) 38%, transparent);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.atlas-hero__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--atlas-guide) 55%, transparent);
+}
+.atlas-hero__cta:focus-visible {
+  outline: 2px solid var(--atlas-guide);
+  outline-offset: 3px;
+}
+.atlas-hero__stat { font-family: var(--font-mono); font-size: 0.85rem; color: var(--atlas-dust); }
+.atlas-hero__stat b { color: var(--atlas-ink); font-weight: 600; }
+
+/* ---- Constellation SVG ---- */
+.atlas-edge {
+  stroke: color-mix(in srgb, var(--atlas-dust) 80%, transparent);
+  stroke-width: 0.55;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke 0.3s cubic-bezier(0.22, 1, 0.36, 1), stroke-width 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.atlas-edge.is-lit {
+  stroke: color-mix(in srgb, var(--atlas-guide) 82%, transparent);
+  stroke-width: 0.9;
+}
+.atlas-hero.is-focused .atlas-edge:not(.is-lit) { opacity: 0.35; }
+
+.atlas-node { cursor: pointer; outline: none; transform-box: fill-box; transform-origin: center; }
+.atlas-node__halo {
+  fill: var(--hue);
+  opacity: 0.2;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.atlas-node__core {
+  fill: var(--hue);
+  stroke: color-mix(in srgb, var(--hue) 45%, #fff);
+  stroke-width: 0.35;
+  transition: filter 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.atlas-node__label {
+  fill: var(--atlas-dust);
+  font-family: var(--font-mono);
+  font-size: 2.7px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: fill 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.atlas-node:hover .atlas-node__core,
+.atlas-node.is-active .atlas-node__core {
+  filter: drop-shadow(0 0 1.6px var(--hue));
+}
+.atlas-node:hover .atlas-node__halo,
+.atlas-node.is-active .atlas-node__halo { opacity: 0.4; }
+.atlas-node:hover .atlas-node__label,
+.atlas-node.is-active .atlas-node__label,
+.atlas-node.is-near .atlas-node__label { fill: var(--atlas-ink); }
+.atlas-node:focus-visible .atlas-node__core {
+  stroke: var(--atlas-guide);
+  stroke-width: 0.9;
+}
+.atlas-node:focus-visible .atlas-node__halo { opacity: 0.45; }
+.atlas-hero.is-focused .atlas-node:not(.is-active):not(.is-near) { opacity: 0.32; }
+
+/* ---- Domain directory — responsive card grid ---- */
+.atlas-catalog {
+  width: 100%;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+}
+.atlas-catalog__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atlas-dust);
+  margin: 0 0 1.4rem;
+}
+.atlas-catalog__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+}
+.atlas-entry {
+  --hue: var(--page-accent);
+}
+.atlas-entry a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.1rem 1.25rem 1.2rem;
+  text-decoration: none;
+  background: var(--atlas-panel);
+  border: 1px solid var(--atlas-line);
+  border-left: 3px solid var(--hue);
+  border-radius: var(--rd-radius);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.2s ease;
+}
+.atlas-entry a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px color-mix(in srgb, var(--hue) 20%, transparent);
+  background: color-mix(in srgb, var(--hue) 5%, var(--atlas-panel));
+}
+.atlas-entry a:focus-visible {
+  outline: 2px solid var(--atlas-guide);
+  outline-offset: 2px;
+}
+.atlas-entry__idx {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--atlas-dust);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+.atlas-entry__star { display: none; }
+.atlas-entry__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--atlas-ink);
+  letter-spacing: -0.02em;
+  transition: color 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.atlas-entry__count {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--hue);
+  font-weight: 600;
+  margin-top: 0.18rem;
+}
+.atlas-entry__blurb {
+  color: var(--atlas-dust);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin-top: auto;
+  padding-top: 0.7rem;
+}
+.atlas-entry a:hover .atlas-entry__name { color: var(--hue); }
+.atlas-entry a:hover .atlas-entry__idx { opacity: 1; color: var(--atlas-guide-deep); }
+
+/* ---- Responsive: stack the sky under the text, hand density to the catalog ---- */
+@media (max-width: 820px) {
+  /* Stack on narrow screens: sky returns to a static block under the copy,
+     so the constellation never sits behind full-width text. */
+  .atlas-hero {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+  }
+  .atlas-hero::after { display: none; }
+  .atlas-hero__content {
+    width: 100%;
+    max-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .atlas-hero__sky {
+    position: relative;
+    inset: auto;
+    order: 1;
+    width: 100%;
+    height: 60vw;
+    min-height: 240px;
+  }
+}
+@media (max-width: 480px) {
+  .atlas-catalog__list {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+  .atlas-entry a { padding: 0.9rem 1rem 1rem; }
+}
+
+/* 粒子基础样式（无动效时隐藏） */
+.atlas-particle {
+  fill: var(--atlas-guide);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Motion: load-in, twinkle, halo pulse, particles — off under reduced-motion ---- */
+@media (prefers-reduced-motion: no-preference) {
+  /* 连线描绘 */
+  @keyframes atlas-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+  /* 节点入场：淡入 + 从中心缩放弹出（需 transform-box: fill-box 配合） */
+  @keyframes atlas-node-enter {
+    from { opacity: 0; transform: scale(0.6); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* 核心闪烁 */
+  @keyframes atlas-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.58; } }
+
+  /* 光晕脉冲：同时呼吸 + 缩放 */
+  @keyframes atlas-halo-pulse {
+    0%, 100% { opacity: 0.14; transform: scale(1); }
+    50%       { opacity: 0.38; transform: scale(1.32); }
+  }
+
+  /* 连线 */
+  .atlas-edge { stroke-dashoffset: 1; animation: atlas-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards; }
+
+  /* 节点入场 — stagger 通过 <g class="atlas-node-float"> 的 nth-of-type 控制 */
+  .atlas-node { animation: atlas-node-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .atlas-node-float:nth-of-type(2n)  .atlas-node { animation-delay: 0.07s; }
+  .atlas-node-float:nth-of-type(3n)  .atlas-node { animation-delay: 0.14s; }
+  .atlas-node-float:nth-of-type(4n)  .atlas-node { animation-delay: 0.21s; }
+  .atlas-node-float:nth-of-type(5n)  .atlas-node { animation-delay: 0.28s; }
+
+  /* 核心闪烁 */
+  .atlas-node__core { animation: atlas-twinkle 6s ease-in-out infinite; }
+  .atlas-node-float:nth-of-type(2n) .atlas-node__core { animation-duration: 7.6s; }
+  .atlas-node-float:nth-of-type(3n) .atlas-node__core { animation-duration: 5.1s; }
+  .atlas-node-float:nth-of-type(5n) .atlas-node__core { animation-duration: 8.3s; }
+  .atlas-hero.is-focused .atlas-node.is-active .atlas-node__core { animation: none; }
+
+  /* 光晕脉冲 */
+  .atlas-node__halo { animation: atlas-halo-pulse 4.2s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+  .atlas-node-float:nth-of-type(2n) .atlas-node__halo { animation-duration: 5.9s;  animation-delay: 0.8s; }
+  .atlas-node-float:nth-of-type(3n) .atlas-node__halo { animation-duration: 3.6s;  animation-delay: 1.6s; }
+  .atlas-node-float:nth-of-type(4n) .atlas-node__halo { animation-duration: 6.8s;  animation-delay: 2.3s; }
+  .atlas-node:hover .atlas-node__halo,
+  .atlas-node.is-active .atlas-node__halo { animation: none; opacity: 0.42; }
+
+  /* 粒子 */
+  .atlas-particle { opacity: 0.75; }
+  .dark .atlas-particle { opacity: 0.9; }
+}
+
+/* ============================================================================
+   SIGNATURE — Homepage recent notes (compact list)
+   紧凑清单：日期 · 领域色点+领域名 · 标题。与星表目录同源的数据，
+   用细分割线而非卡片，避免与上方领域卡片重复视觉语言。
+   ========================================================================== */
+.atlas-recent {
+  width: 100%;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+}
+.atlas-recent__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1.4rem;
+}
+.atlas-recent__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atlas-dust);
+  margin: 0;
+}
+.atlas-recent__more {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--atlas-guide-deep);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--atlas-guide) 40%, transparent);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.atlas-recent__more:hover {
+  color: var(--atlas-guide);
+  border-bottom-color: var(--atlas-guide);
+}
+.atlas-recent__more:focus-visible {
+  outline: 2px solid var(--atlas-guide);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.atlas-recent__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.atlas-recent__item {
+  border-top: 1px solid var(--atlas-line);
+}
+.atlas-recent__item:last-child {
+  border-bottom: 1px solid var(--atlas-line);
+}
+.atlas-recent__row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.78rem 0.5rem;
+  text-decoration: none;
+  border-radius: var(--rd-radius);
+  transition: background 0.18s ease;
+  cursor: pointer;
+}
+.atlas-recent__row:hover {
+  background: color-mix(in srgb, var(--hue) 7%, transparent);
+}
+.atlas-recent__row:focus-visible {
+  outline: 2px solid var(--atlas-guide);
+  outline-offset: -2px;
+}
+
+.atlas-recent__date {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--atlas-dust);
+  letter-spacing: 0.02em;
+}
+.atlas-recent__domain {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--atlas-dust);
+}
+.atlas-recent__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hue);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--hue) 22%, transparent);
+  flex: none;
+}
+.atlas-recent__domain-name {
+  color: color-mix(in srgb, var(--hue) 70%, var(--atlas-ink));
+}
+.atlas-recent__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--atlas-ink);
+  letter-spacing: 0.005em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.18s ease;
+}
+.atlas-recent__row:hover .atlas-recent__title {
+  color: var(--hue);
+}
+
+/* ---- Responsive: 日期/领域换到标题上方，标题不再截断 ---- */
+@media (max-width: 820px) {
+  .atlas-recent__row {
+    flex-wrap: wrap;
+    gap: 0.35rem 0.9rem;
+    padding: 0.7rem 0.4rem;
+  }
+  .atlas-recent__title {
+    flex-basis: 100%;
+    white-space: normal;
+    font-size: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .atlas-recent { padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1rem, 5vw, 1.5rem); }
+  .atlas-recent__head { margin-bottom: 1rem; }
+}
+
+/* ============================ Back-to-top button fix ==================== */
+/* Hextra renders the sticky TOC footer with hx:bg-white / hx:dark:bg-dark.
+   Our page background is --atlas-bg (#f4f6fc), not pure white, so the white
+   box stands out. Override it to match the actual canvas color. */
+.hextra-toc .hx\:sticky.hx\:bottom-0 {
+  background-color: var(--atlas-bg) !important;
+  box-shadow: 0 -12px 16px var(--atlas-bg) !important;
+}
+.dark .hextra-toc .hx\:sticky.hx\:bottom-0 {
+  background-color: var(--atlas-bg) !important;
+  box-shadow: 0 -12px 16px var(--atlas-bg) !important;
+}

@@ -1,7 +1,201 @@
-baseURL: https://example.org/
-locale: en-us
-title: My New Hugo Project
+# ============================================================
+# Hugo + Hextra 站点配置
+# 多语言：默认中文(zh-cn)，第二语言英文(en)，后续可继续扩展
+# ============================================================
+baseURL: "https://example.org/"
 
+# --- 多语言 ---
+defaultContentLanguage: zh-cn
+defaultContentLanguageInSubdir: false   # 中文在根路径 /，英文在 /en/
+
+enableInlineShortcodes: true
+enableEmoji: true
+enableGitInfo: false
+hasCJKLanguage: true                    # 中文分词/字数统计更准确
+
+# --- 主题模块 ---
 module:
   imports:
     - path: github.com/imfing/hextra
+
+# --- Markdown 渲染 ---
+markup:
+  goldmark:
+    renderer:
+      unsafe: true                      # 允许文档内的原始 HTML（消除 Raw HTML 警告）
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)'], ['$', '$']]
+  highlight:
+    noClasses: false                    # 交给 Hextra 主题处理代码高亮配色
+
+# --- 全局参数 ---
+params:
+  description: "技术学习与实践笔记"
+  # KaTeX / MathJax 数学公式渲染
+  math:
+    engine: mathjax
+  # 搜索（离线全文检索）
+  search:
+    enable: true
+    type: flexsearch
+    flexsearch:
+      index: content                    # content | summary | heading | title
+      tokenize: forward
+  # 暗色模式
+  theme:
+    default: system                     # light | dark | system
+    displayToggle: true
+  # 页面底部
+  page:
+    width: normal
+  footer:
+    enable: true
+    displayCopyright: true
+    displayPoweredBy: true
+    # 备案号（ICP）：暂未取得，留空时不展示。
+    # 取得后填入即可，仅在中文站点（zh-cn）页脚显示，英文站点不展示。
+    # 例如：icp: "京ICP备15037996号-1"
+    icp: ""
+    icpLink: "https://beian.miit.gov.cn/"
+  # 显示阅读时间 / 更新日期
+  displayUpdatedDate: true
+  dateFormat: "2006-01-02"
+  # “编辑此页”链接（暂未指定仓库，关闭；接入 GitHub 后填 base 并 enable）
+  editURL:
+    enable: false
+    base: ""
+
+# ============================================================
+# 各语言的标题与导航菜单
+# ============================================================
+languages:
+  zh-cn:
+    label: 中文
+    locale: zh-CN
+    weight: 1
+    title: "我的技术博客"
+    params:
+      description: "技术学习与实践笔记"
+    menu:
+      main:
+        # —— 四大栏：父项为下拉开关，悬停/点击展开各自模块 ——
+        # 注意：navbar 直接用 pageRef 原文拼链接，而 Hugo 默认把 ASCII 路径转小写，
+        #       所以这里的 pageRef 一律写成小写，避免生成大写链接导致 404。
+        - identifier: sec-soft
+          name: 软件开发
+          weight: 2
+        - identifier: soft-python
+          name: Python
+          parent: sec-soft
+          pageRef: /docs/软件开发/python开发
+          weight: 1
+        - identifier: soft-golang
+          name: Golang
+          parent: sec-soft
+          pageRef: /docs/软件开发/golang开发
+          weight: 2
+        - identifier: soft-rust
+          name: Rust
+          parent: sec-soft
+          pageRef: /docs/软件开发/rust开发
+          weight: 3
+        - identifier: soft-php
+          name: PHP
+          parent: sec-soft
+          pageRef: /docs/软件开发/php开发
+          weight: 4
+        - identifier: soft-web
+          name: Web
+          parent: sec-soft
+          pageRef: /docs/软件开发/web开发
+          weight: 5
+        - identifier: sec-sys
+          name: 系统管理
+          weight: 3
+        - identifier: sys-linux
+          name: Linux 系统
+          parent: sec-sys
+          pageRef: /docs/系统管理/linux系统
+          weight: 1
+        - identifier: sys-cloud
+          name: 云原生
+          parent: sec-sys
+          pageRef: /docs/系统管理/云原生
+          weight: 2
+        - identifier: sec-net
+          name: 网络技术
+          weight: 4
+        - identifier: net-net
+          name: 网络技术
+          parent: sec-net
+          pageRef: /docs/网络技术/网络技术
+          weight: 1
+        - identifier: net-sec
+          name: 安全
+          parent: sec-net
+          pageRef: /docs/网络技术/安全
+          weight: 2
+        - identifier: sec-ai
+          name: 人工智能
+          weight: 5
+        - identifier: ai-ml
+          name: 机器学习基础
+          parent: sec-ai
+          pageRef: /docs/人工智能/机器学习基础
+          weight: 1
+        - identifier: ai-dl
+          name: 深度学习基础
+          parent: sec-ai
+          pageRef: /docs/人工智能/深度学习基础
+          weight: 2
+        - identifier: ai-llm
+          name: 大模型应用
+          parent: sec-ai
+          pageRef: /docs/人工智能/大模型应用
+          weight: 3
+        # 概览（原「文档」）：移到搜索栏左侧
+        - identifier: nav-overview
+          name: 概览
+          pageRef: /docs
+          weight: 6
+        - name: 搜索
+          weight: 8
+          params:
+            type: search
+        - name: 切换主题
+          weight: 9
+          params:
+            type: theme-toggle
+        - name: 语言
+          weight: 10
+          params:
+            type: language-switch
+
+  en:
+    label: English
+    locale: en-US
+    weight: 2
+    title: "My Tech Blog"
+    params:
+      description: "Notes on tech learning and practice"
+    menu:
+      main:
+        - name: Docs
+          pageRef: /docs
+          weight: 1
+        - name: Search
+          weight: 8
+          params:
+            type: search
+        - name: Theme
+          weight: 9
+          params:
+            type: theme-toggle
+        - name: Language
+          weight: 10
+          params:
+            type: language-switch

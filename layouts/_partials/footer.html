@@ -1,0 +1,65 @@
+{{/*
+  项目级页脚覆盖（优先于 themes/hextra/layouts/_partials/footer.html）。
+  在主题默认页脚基础上做了两点定制：
+    1. 版权 / Powered by 居中展示，排版更清爽；
+    2. 增加备案号（ICP）一行 —— 仅在「中文站点」且「已配置备案号」时展示。
+       备案号通过 hugo.yaml 的 params.footer.icp 配置，暂未取得时留空即不显示。
+*/}}
+{{- $enableFooterSwitches := .Store.Get "enableFooterSwitches" | default false -}}
+{{- $displayThemeToggle := site.Params.theme.displayToggle | default true -}}
+{{- $footerSwitchesVisible := and $enableFooterSwitches (or hugo.IsMultilingual $displayThemeToggle) -}}
+{{- $copyrightSectionVisible := or (.Site.Params.footer.displayPoweredBy | default true) .Site.Params.footer.displayCopyright -}}
+
+{{- $copyright := (T "copyright") | default "© 2024 Hextra." -}}
+{{- $poweredBy := (T "poweredBy") | default "Powered by Hextra" -}}
+
+{{/* 备案号：仅在中文站点（zh-cn）且已配置 icp 时显示；留空则不展示（预留，后续填写即生效） */}}
+{{- $icp := .Site.Params.footer.icp | default "" -}}
+{{- $icpLink := .Site.Params.footer.icpLink | default "https://beian.miit.gov.cn/" -}}
+{{- $isZh := eq .Site.Language.Lang "zh-cn" -}}
+{{- $showIcp := and $isZh (ne (trim $icp " ") "") -}}
+
+<footer class="hextra-footer hx:bg-gray-100 hx:pb-[env(safe-area-inset-bottom)] hx:dark:bg-neutral-900 hx:print:bg-transparent">
+  {{- if $footerSwitchesVisible -}}
+    <div class="hx:mx-auto hx:flex hx:gap-2 hx:py-2 hx:px-4 hextra-max-footer-width">
+      {{- partial "language-switch.html" (dict "context" .) -}}
+      {{- with $displayThemeToggle }}{{ partial "theme-toggle.html" }}{{ end -}}
+    </div>
+    {{- if or hugo.IsMultilingual $displayThemeToggle -}}
+      <hr class="hx:border-gray-200 hx:dark:border-neutral-800" />
+    {{- end -}}
+  {{- end -}}
+  <div class="hextra-custom-footer hextra-max-footer-width hx:mx-auto hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400">
+    {{- partial "custom/footer.html" (dict "context" . "switchesVisible" $footerSwitchesVisible "copyrightVisible" $copyrightSectionVisible) -}}
+  </div>
+  {{- if $copyrightSectionVisible -}}
+    <div
+      class="hextra-max-footer-width hx:mx-auto hx:flex hx:justify-center hx:py-6 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400"
+    >
+      {{- $hasPB := (.Site.Params.footer.displayPoweredBy | default true) -}}
+      {{- $hasCopy := .Site.Params.footer.displayCopyright -}}
+      <div class="hx:flex hx:w-full hx:flex-wrap hx:items-center hx:justify-center hx:gap-x-2 hx:gap-y-1 hx:text-center hx:text-xs">
+        {{- if $hasPB }}<span class="hx:font-semibold">{{ template "theme-credit" $poweredBy }}</span>{{- end -}}
+        {{- if $hasCopy -}}
+          {{- if $hasPB }}<span class="hx:opacity-40">·</span>{{- end -}}
+          <span>{{ $copyright | markdownify }}</span>
+        {{- end -}}
+        {{- if $showIcp -}}
+          {{- if or $hasPB $hasCopy }}<span class="hx:opacity-40">·</span>{{- end -}}
+          <a class="hx:text-current hx:underline hx:underline-offset-2 hx:decoration-dotted hover:hx:text-gray-800 hx:dark:hover:hx:text-gray-100" href="{{ $icpLink }}" target="_blank" rel="noopener noreferrer nofollow">{{ $icp }}</a>
+        {{- end -}}
+      </div>
+    </div>
+  {{- end -}}
+</footer>
+
+{{- define "theme-credit" -}}
+  <a class="hx:flex hx:text-xs hx:items-center hx:gap-1 hx:text-current" target="_blank" rel="noopener noreferrer" title="Hextra GitHub Homepage" href="https://github.com/imfing/hextra">
+    <span>
+      {{- . | markdownify -}}
+      {{- if strings.Contains . "Hextra" -}}
+        {{- partial "utils/icon.html" (dict "name" "hextra" "attributes" `height=1em class="hx:inline-block hx:ltr:ml-1 hx:rtl:mr-1 hx:align-[-2.5px]"`) -}}
+      {{- end -}}
+    </span>
+  </a>
+{{- end -}}

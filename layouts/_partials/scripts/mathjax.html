@@ -1,0 +1,44 @@
+{{/*
+  MathJax loader — project override of themes/hextra/layouts/_partials/scripts/mathjax.html
+
+  Fix: MathJax 3 requires window.MathJax to be configured BEFORE the library
+  script runs. The theme shipped the <script src> first and the config second,
+  which races on cached loads (the async library executes first, sets
+  window.MathJax to its internal object, then the config script overwrites it
+  mid-startup and MathJax crashes — every formula then shows as literal \[...\]).
+  Defining the config first eliminates the race.
+*/}}
+<script>
+  window.MathJax = {
+    loader: {
+      // Preload extensions the docs rely on so a runtime \require can never
+      // fail mid-typeset (a single failed \require aborts the whole page).
+      load: [
+        "[tex]/amscd",
+        "[tex]/cancel",
+        "[tex]/enclose",
+        "[tex]/color",
+        "[tex]/bbox",
+        "[tex]/verb",
+        "[tex]/html",
+      ],
+    },
+    tex: {
+      packages: { "[+]": ["amscd", "cancel", "enclose", "color", "bbox", "verb", "html"] },
+      inlineMath: [
+        ["\\(", "\\)"],
+        ["$", "$"],
+      ],
+      displayMath: [
+        ["\\[", "\\]"],
+        ["$$", "$$"],
+      ],
+    },
+    options: {
+      skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      ignoreHtmlClass: "tex2jax_ignore|no-math",
+    },
+  };
+</script>
+{{ $mathjaxJsUrl := "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" -}}
+<script id="MathJax-script" async src="{{ $mathjaxJsUrl }}" crossorigin="anonymous"></script>

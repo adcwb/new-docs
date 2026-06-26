@@ -1,0 +1,5 @@
+# Project-level i18n override (takes precedence over themes/hextra/i18n/en.yaml)
+# Only override keys we customize; everything else falls back to the theme.
+
+# Footer copyright (author)
+copyright: "© 2026 adcwb. All rights reserved."
