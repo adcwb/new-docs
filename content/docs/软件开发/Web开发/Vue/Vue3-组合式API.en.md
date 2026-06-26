@@ -1,0 +1,10 @@
+---
+title: "Vue 3 组合式 API"
+weight: 30
+date: 2026-06-26
+tags: ["Vue", "Vue3", "组合式API", "Composition API", "前端"]
+---
+
+{{< callout type="info" >}}
+This article has not been translated to English yet. Use the language toggle in the top navigation bar to switch to Chinese and read the full content.
+{{< /callout >}}

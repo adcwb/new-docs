@@ -185,9 +185,82 @@ languages:
       description: "Personal tech knowledge base covering software dev, Linux, networking & AI"
     menu:
       main:
-        - name: Docs
-          pageRef: /docs
+        - identifier: sec-soft
+          name: Software Dev
+          weight: 2
+        - identifier: soft-python
+          name: Python
+          parent: sec-soft
+          pageRef: /docs/软件开发/python开发
           weight: 1
+        - identifier: soft-golang
+          name: Golang
+          parent: sec-soft
+          pageRef: /docs/软件开发/golang开发
+          weight: 2
+        - identifier: soft-rust
+          name: Rust
+          parent: sec-soft
+          pageRef: /docs/软件开发/rust开发
+          weight: 3
+        - identifier: soft-php
+          name: PHP
+          parent: sec-soft
+          pageRef: /docs/软件开发/php开发
+          weight: 4
+        - identifier: soft-web
+          name: Web
+          parent: sec-soft
+          pageRef: /docs/软件开发/web开发
+          weight: 5
+        - identifier: sec-sys
+          name: Systems
+          weight: 3
+        - identifier: sys-linux
+          name: Linux
+          parent: sec-sys
+          pageRef: /docs/系统管理/linux系统
+          weight: 1
+        - identifier: sys-cloud
+          name: Cloud Native
+          parent: sec-sys
+          pageRef: /docs/系统管理/云原生
+          weight: 2
+        - identifier: sec-net
+          name: Networking
+          weight: 4
+        - identifier: net-net
+          name: Fundamentals
+          parent: sec-net
+          pageRef: /docs/网络技术/网络技术
+          weight: 1
+        - identifier: net-sec
+          name: Security
+          parent: sec-net
+          pageRef: /docs/网络技术/安全
+          weight: 2
+        - identifier: sec-ai
+          name: AI
+          weight: 5
+        - identifier: ai-ml
+          name: Machine Learning
+          parent: sec-ai
+          pageRef: /docs/人工智能/机器学习基础
+          weight: 1
+        - identifier: ai-dl
+          name: Deep Learning
+          parent: sec-ai
+          pageRef: /docs/人工智能/深度学习基础
+          weight: 2
+        - identifier: ai-llm
+          name: LLMs
+          parent: sec-ai
+          pageRef: /docs/人工智能/大模型应用
+          weight: 3
+        - identifier: nav-overview
+          name: Overview
+          pageRef: /docs
+          weight: 6
         - name: Search
           weight: 8
           params:
