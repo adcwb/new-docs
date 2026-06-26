@@ -2,7 +2,7 @@
 # Hugo + Hextra 站点配置
 # 多语言：默认中文(zh-cn)，第二语言英文(en)，后续可继续扩展
 # ============================================================
-baseURL: "https://example.org/"
+baseURL: "https://adcwb.github.io/new-docs/"
 
 # --- 多语言 ---
 defaultContentLanguage: zh-cn
@@ -34,7 +34,8 @@ markup:
 
 # --- 全局参数 ---
 params:
-  description: "技术学习与实践笔记"
+  author: "adcwb"
+  description: "个人技术知识库，涵盖软件开发（Python / Go / Rust）、Linux 系统管理、网络安全与人工智能实践笔记"
   # KaTeX / MathJax 数学公式渲染
   math:
     engine: mathjax
@@ -64,10 +65,10 @@ params:
   # 显示阅读时间 / 更新日期
   displayUpdatedDate: true
   dateFormat: "2006-01-02"
-  # “编辑此页”链接（暂未指定仓库，关闭；接入 GitHub 后填 base 并 enable）
+  # “编辑此页”链接
   editURL:
-    enable: false
-    base: ""
+    enable: true
+    base: “https://github.com/adcwb/new-docs/edit/master/content”
 
 # ============================================================
 # 各语言的标题与导航菜单
@@ -181,7 +182,7 @@ languages:
     weight: 2
     title: "My Tech Blog"
     params:
-      description: "Notes on tech learning and practice"
+      description: "Personal tech knowledge base covering software dev, Linux, networking & AI"
     menu:
       main:
         - name: Docs

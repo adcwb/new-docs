@@ -1,0 +1,36 @@
+# robots.txt — https://adcwb.github.io/new-docs/
+# Generated for Hugo + Hextra site
+
+User-agent: *
+Allow: /
+
+# Block build artifacts and internal Hugo paths
+Disallow: /tags/
+Disallow: /categories/
+
+# AI / LLM crawlers — explicitly welcomed; see /llms.txt
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemaps
+Sitemap: https://adcwb.github.io/new-docs/sitemap.xml
+Sitemap: https://adcwb.github.io/new-docs/zh-cn/sitemap.xml
+Sitemap: https://adcwb.github.io/new-docs/en/sitemap.xml

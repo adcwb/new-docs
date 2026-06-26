@@ -1,0 +1,65 @@
+# 我的技术博客 · My Tech Blog
+
+> 个人技术知识库，涵盖软件开发、系统管理、网络技术与人工智能。
+> Personal technical knowledge base covering software development, system administration, networking, and AI.
+
+This site is a structured, hands-on technical reference written in Chinese (primary) and English.
+All content is original notes and practice summaries from real-world engineering work.
+
+Site URL: https://adcwb.github.io/new-docs/
+Language: Chinese (zh-CN) primary, English (/en/) secondary
+Author: adcwb
+License: Content CC BY-NC-SA 4.0
+
+---
+
+## Software Development / 软件开发
+
+- [Python Development](https://adcwb.github.io/new-docs/docs/软件开发/python开发/): Python fundamentals, web frameworks (Django, Flask, DRF, Tornado), web scraping, testing, network programming, and utility scripts.
+- [Golang Development](https://adcwb.github.io/new-docs/docs/软件开发/golang开发/): Go language fundamentals, concurrency model, standard library, plugins, frameworks, and high-performance service patterns.
+- [Rust Development](https://adcwb.github.io/new-docs/docs/软件开发/rust开发/): Ownership and lifetimes, memory safety, systems programming, and Rust frameworks.
+- [PHP Development](https://adcwb.github.io/new-docs/docs/软件开发/php开发/): PHP basics, database integration, and web backend frameworks.
+- [Web Development](https://adcwb.github.io/new-docs/docs/软件开发/web开发/): Frontend engineering with React, Vue, Angular; HTTP protocol and API design.
+
+## System Administration / 系统管理
+
+- [Linux Systems](https://adcwb.github.io/new-docs/docs/系统管理/linux系统/): System services, Shell scripting, common commands, networking, and operational troubleshooting.
+- [Cloud Native](https://adcwb.github.io/new-docs/docs/系统管理/云原生/): Kubernetes, container orchestration, observability, and cloud-native infrastructure.
+
+## Networking / 网络技术
+
+- [Network Technology](https://adcwb.github.io/new-docs/docs/网络技术/网络技术/): TCP/IP, protocol analysis, routing, switching, and network troubleshooting.
+- [Security](https://adcwb.github.io/new-docs/docs/网络技术/安全/): Web security, penetration testing (Kali), WiFi security, vulnerability discovery, and system hardening.
+
+## Artificial Intelligence / 人工智能
+
+- [Machine Learning](https://adcwb.github.io/new-docs/docs/人工智能/机器学习基础/): Supervised learning, model evaluation, feature engineering, and classical algorithms.
+- [Deep Learning](https://adcwb.github.io/new-docs/docs/人工智能/深度学习基础/): Neural networks, CNN/RNN architectures, training, and optimization.
+- [LLM Applications](https://adcwb.github.io/new-docs/docs/人工智能/大模型应用/): Large language models, prompt engineering, RAG, and production deployment.
+
+## Databases / 数据库
+
+- [MySQL](https://adcwb.github.io/new-docs/docs/数据库/mysql数据库/): Schema design, query optimization, indexing, and transactions.
+- [PostgreSQL](https://adcwb.github.io/new-docs/docs/数据库/postgresql/): Advanced SQL, extensions, and performance tuning.
+- [InfluxDB](https://adcwb.github.io/new-docs/docs/数据库/influxdb/): Time-series data storage and querying.
+- [SQL Server](https://adcwb.github.io/new-docs/docs/数据库/sqlserver/): Windows-ecosystem SQL Server operations.
+
+## Data Analysis / 数据分析
+
+- [Business Data Analysis](https://adcwb.github.io/new-docs/docs/数据分析/业务数据分析/): Data cleaning, visualization, and analytical methodology.
+- [Office Automation](https://adcwb.github.io/new-docs/docs/数据分析/办公自动化/): Python-powered office automation workflows.
+
+## Finance / 金融相关
+
+- [Finance & Trading](https://adcwb.github.io/new-docs/docs/金融相关/): Quantitative analysis, stocks, futures, and Web3 fundamentals.
+
+---
+
+## Optional: Full Content Index
+
+For a machine-readable index of all article titles and paths, see:
+https://adcwb.github.io/new-docs/sitemap.xml
+
+Search index (JSON, offline FlexSearch):
+https://adcwb.github.io/new-docs/zh-cn/search-data/search-index.json
+https://adcwb.github.io/new-docs/en/search-data/search-index.json

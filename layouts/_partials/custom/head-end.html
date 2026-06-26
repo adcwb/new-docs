@@ -18,3 +18,61 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+
+{{- /* ============================================================
+     SEO: Open Graph + Twitter Card + JSON-LD structured data
+     ============================================================ */ -}}
+{{- $siteName := .Site.Title -}}
+{{- $pageTitle := cond .IsHome .Site.Title (printf "%s · %s" .Title .Site.Title) -}}
+{{- $globalDesc := .Site.Params.description | default "" -}}
+{{- $desc := or .Params.description "" -}}
+{{- if and .IsPage (eq $desc "") -}}
+  {{- $desc = .Summary | plainify | truncate 160 "…" -}}
+{{- end -}}
+{{- if eq $desc "" -}}{{- $desc = $globalDesc -}}{{- end -}}
+{{- $localeMap := dict "zh-cn" "zh_CN" "en" "en_US" -}}
+{{- $ogLocale := index $localeMap .Site.Language.Lang | default "zh_CN" -}}
+{{- $ogType := cond .IsPage "article" "website" -}}
+
+<meta property="og:type" content="{{ $ogType }}" />
+<meta property="og:site_name" content="{{ $siteName }}" />
+<meta property="og:title" content="{{ $pageTitle }}" />
+<meta property="og:description" content="{{ $desc }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:locale" content="{{ $ogLocale }}" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ $pageTitle }}" />
+<meta name="twitter:description" content="{{ $desc }}" />
+
+{{- if .IsHome }}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "WebSite"
+  "name" $siteName
+  "url" .Site.BaseURL
+  "description" $desc
+  "inLanguage" .Site.Language.Lang
+  "potentialAction" (dict
+    "@type" "SearchAction"
+    "target" (dict "@type" "EntryPoint" "urlTemplate" (printf "%ssearch/?q={search_term_string}" .Site.BaseURL))
+    "query-input" "required name=search_term_string"
+  )
+| jsonify (dict "indent" "  ") | safeHTML }}
+</script>
+{{- else if .IsPage }}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "TechArticle"
+  "headline" .Title
+  "description" $desc
+  "url" .Permalink
+  "datePublished" (.Date.Format "2006-01-02")
+  "dateModified" (.Lastmod.Format "2006-01-02")
+  "inLanguage" .Site.Language.Lang
+  "author" (dict "@type" "Person" "name" (.Site.Params.author | default $siteName))
+  "publisher" (dict "@type" "Organization" "name" $siteName "url" .Site.BaseURL)
+| jsonify (dict "indent" "  ") | safeHTML }}
+</script>
+{{- end -}}
