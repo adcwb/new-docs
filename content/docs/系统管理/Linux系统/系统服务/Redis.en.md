@@ -1,7 +1,8 @@
 ---
 title: "Redis"
 weight: 60
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Redis", "Cache", "NoSQL", "Operations"]
 ---
 
 {{< callout type="info" >}}

@@ -1,7 +1,8 @@
 ---
 title: "OpenVPN"
 weight: 40
-date: 2026-06-05
+date: 2026-06-27
+tags: ["OpenVPN", "VPN", "Networking", "Security"]
 ---
 
 {{< callout type="info" >}}

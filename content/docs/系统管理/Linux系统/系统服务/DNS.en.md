@@ -1,7 +1,8 @@
 ---
 title: "DNS"
 weight: 35
-date: 2026-06-05
+date: 2026-06-27
+tags: ["DNS", "Networking", "Operations", "Linux"]
 ---
 
 {{< callout type="info" >}}

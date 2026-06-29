@@ -1,7 +1,8 @@
 ---
-title: "sql示例"
+title: "SQL Examples"
 weight: 60
-date: 2026-06-05
+date: 2026-06-27
+tags: ["MySQL", "SQL", "Operations", "Performance"]
 ---
 
 {{< callout type="info" >}}

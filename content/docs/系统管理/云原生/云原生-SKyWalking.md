@@ -2,7 +2,10 @@
 title: "云原生-SKyWalking"
 weight: 30
 date: 2026-06-05
+tags: ["SkyWalking", "APM", "可观测性", "云原生"]
 ---
+
+Apache SkyWalking 是一款专为微服务、云原生及容器化架构设计的应用性能监控（APM）平台，支持分布式链路追踪、服务拓扑分析和告警通知。本文介绍 SkyWalking 的 Agent 数据采集配置及核心仪表盘的使用方式。
 
 ## 信息采集
 

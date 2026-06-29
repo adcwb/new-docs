@@ -2,7 +2,10 @@
 title: "云原生-OpenTelemetry"
 weight: 40
 date: 2026-06-05
+tags: ["OpenTelemetry", "可观测性", "云原生", "监控"]
 ---
+
+OpenTelemetry 是 CNCF 主导的可观测性框架，统一了链路追踪（Traces）、指标（Metrics）和日志（Logs）的采集与导出标准，可与 Jaeger、Prometheus 等后端无缝集成。本文介绍其核心概念、SDK 使用方式及在 Go 应用中的埋点实践。
 
 ## OpenTelemetry使用指南
 

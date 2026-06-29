@@ -2,7 +2,10 @@
 title: "kubernetes"
 weight: 105
 date: 2026-06-05
+tags: ["Kubernetes", "容器编排", "云原生", "运维"]
 ---
+
+Kubernetes（K8s）是 CNCF 托管的开源容器编排平台，提供自动化部署、弹性伸缩、服务发现和滚动更新等能力。本文介绍高可用集群的核心组件架构、节点角色划分以及集群安装配置步骤。
 
 ## Kubernetes高可用集群安装
 

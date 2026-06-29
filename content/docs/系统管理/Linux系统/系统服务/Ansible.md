@@ -2,6 +2,7 @@
 title: "Ansible"
 weight: 140
 date: 2026-06-05
+tags: ["Ansible", "自动化运维", "DevOps", "Linux"]
 ---
 
 CentOS 安装：

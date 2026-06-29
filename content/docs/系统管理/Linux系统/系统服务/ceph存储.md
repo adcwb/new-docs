@@ -2,6 +2,7 @@
 title: "ceph存储"
 weight: 155
 date: 2026-06-05
+tags: ["Ceph", "分布式存储", "对象存储", "运维"]
 ---
 
 ## Cpeh

@@ -1,7 +1,8 @@
 ---
 title: "Hysteria2"
 weight: 50
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Hysteria2", "Proxy", "Networking", "Security"]
 ---
 
 {{< callout type="info" >}}

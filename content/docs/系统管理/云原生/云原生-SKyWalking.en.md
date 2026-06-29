@@ -1,7 +1,8 @@
 ---
-title: "Cloud Native-SKyWalking"
+title: "Cloud Native - SkyWalking"
 weight: 30
-date: 2026-06-05
+date: 2026-06-27
+tags: ["SkyWalking", "APM", "Observability", "Cloud Native"]
 ---
 
 {{< callout type="info" >}}

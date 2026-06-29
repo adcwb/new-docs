@@ -1,7 +1,8 @@
 ---
 title: "RabbitMQ"
 weight: 90
-date: 2026-06-05
+date: 2026-06-27
+tags: ["RabbitMQ", "Message Queue", "Middleware", "Operations"]
 ---
 
 {{< callout type="info" >}}

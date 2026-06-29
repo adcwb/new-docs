@@ -1,7 +1,8 @@
 ---
-title: "Cloud Native-OpenTelemetry"
+title: "Cloud Native - OpenTelemetry"
 weight: 40
-date: 2026-06-05
+date: 2026-06-27
+tags: ["OpenTelemetry", "Observability", "Cloud Native", "Monitoring"]
 ---
 
 {{< callout type="info" >}}

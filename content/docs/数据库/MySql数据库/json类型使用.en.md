@@ -1,7 +1,8 @@
 ---
-title: "json类型使用"
+title: "JSON Type Usage"
 weight: 80
-date: 2026-06-05
+date: 2026-06-27
+tags: ["MySQL", "JSON", "Data Types"]
 ---
 
 {{< callout type="info" >}}

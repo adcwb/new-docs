@@ -1,7 +1,8 @@
 ---
-title: "InfluxDB文档"
+title: "InfluxDB Documentation"
 weight: 70
-date: 2026-06-05
+date: 2026-06-27
+tags: ["InfluxDB", "Time Series Database", "Monitoring", "Operations"]
 ---
 
 {{< callout type="info" >}}

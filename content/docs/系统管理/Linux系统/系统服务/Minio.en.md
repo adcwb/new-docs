@@ -1,7 +1,8 @@
 ---
-title: "Minio"
+title: "MinIO"
 weight: 80
-date: 2026-06-05
+date: 2026-06-27
+tags: ["MinIO", "Object Storage", "Cloud Storage", "Operations"]
 ---
 
 {{< callout type="info" >}}

@@ -2,9 +2,12 @@
 title: "Minio"
 weight: 80
 date: 2026-06-05
+tags: ["MinIO", "对象存储", "云存储", "运维"]
 ---
 
-Minio
+MinIO 是一款高性能、兼容 S3 协议的开源对象存储服务，适合私有化部署和云原生场景。本文介绍 MinIO 的安装、用户创建、配置文件设置及 Systemd 服务管理。
+
+## MinIO 安装与配置
 
 下载
 

@@ -1,7 +1,8 @@
 ---
 title: "LDAP"
 weight: 150
-date: 2026-06-05
+date: 2026-06-27
+tags: ["LDAP", "Directory Service", "Authentication", "Operations"]
 ---
 
 {{< callout type="info" >}}

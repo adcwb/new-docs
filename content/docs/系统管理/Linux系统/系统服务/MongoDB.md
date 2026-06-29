@@ -2,7 +2,10 @@
 title: "MongoDB"
 weight: 65
 date: 2026-06-05
+tags: ["MongoDB", "NoSQL", "数据库", "运维"]
 ---
+
+MongoDB 是一款面向文档的 NoSQL 数据库，以灵活的 JSON-like 文档模型和水平扩展能力著称。本文介绍在 CentOS 上通过二进制包安装 MongoDB 5.0、配置数据目录并注册 Systemd 服务的完整流程。
 
 ## CentOS安装MongoDB数据库
 

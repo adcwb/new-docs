@@ -1,7 +1,8 @@
 ---
-title: "VPS常用术语"
+title: "VPS Common Terminology"
 weight: 175
-date: 2026-06-05
+date: 2026-06-27
+tags: ["VPS", "Networking", "Cloud Server", "Terminology"]
 ---
 
 {{< callout type="info" >}}

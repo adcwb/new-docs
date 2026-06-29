@@ -2,6 +2,7 @@
 title: "Prometheus"
 weight: 120
 date: 2026-06-05
+tags: ["Prometheus", "监控", "运维", "云原生"]
 ---
 
 ## Prometheus监控体系建设

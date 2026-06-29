@@ -2,6 +2,7 @@
 title: "Systemd"
 weight: 15
 date: 2026-06-05
+tags: ["Systemd", "Linux", "服务管理", "运维"]
 ---
 
 Systemd 官方文档：https://systemd.io/

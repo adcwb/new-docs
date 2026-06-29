@@ -2,7 +2,10 @@
 title: "kafka"
 weight: 95
 date: 2026-06-05
+tags: ["Kafka", "消息队列", "大数据", "中间件"]
 ---
+
+Kafka 是 Apache 基金会开源的高吞吐量分布式消息流平台，广泛用于日志采集、事件流处理和实时数据管道场景。本文介绍基于 CentOS 7 的 JDK、ZooKeeper 和 Kafka 的完整安装配置流程。
 
 ## 环境准备
 

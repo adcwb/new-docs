@@ -2,7 +2,10 @@
 title: "MySQL配置"
 weight: 90
 date: 2026-06-05
+tags: ["MySQL", "配置", "运维"]
 ---
+
+本文提供一份生产可用的 MySQL 配置参考（`my.cnf` / `mysqld` 段），并逐一解释各关键参数的含义与推荐值。
 
 ```ini
 [mysqld]
@@ -45,7 +48,7 @@ query_cache_type=0
 query_cache_size=0
 tmp_table_size=256M
 max_heap_table_size=256M
-```text
+```
 
 
 

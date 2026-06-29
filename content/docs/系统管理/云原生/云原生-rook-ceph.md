@@ -2,7 +2,10 @@
 title: "云原生-rook-ceph"
 weight: 20
 date: 2026-06-05
+tags: ["Rook", "Ceph", "分布式存储", "云原生"]
 ---
+
+Rook 是 CNCF 孵化的 Kubernetes 存储编排项目，通过 Operator 模式将 Ceph 等存储系统与 Kubernetes 深度整合。本文介绍使用 Rook 在 Kubernetes 集群上部署 Ceph 存储，并创建 RBD 块存储和 CephFS 文件系统的操作步骤。
 
 ## 安装
 

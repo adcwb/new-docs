@@ -1,7 +1,8 @@
 ---
-title: "nginx"
+title: "Nginx"
 weight: 125
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Nginx", "Web Server", "Reverse Proxy", "Linux"]
 ---
 
 {{< callout type="info" >}}

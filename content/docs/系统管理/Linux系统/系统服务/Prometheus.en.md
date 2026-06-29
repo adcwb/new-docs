@@ -1,7 +1,8 @@
 ---
 title: "Prometheus"
 weight: 120
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Prometheus", "Monitoring", "Operations", "Cloud Native"]
 ---
 
 {{< callout type="info" >}}

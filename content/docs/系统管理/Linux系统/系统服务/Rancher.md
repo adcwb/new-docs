@@ -2,7 +2,10 @@
 title: "Rancher"
 weight: 115
 date: 2026-06-05
+tags: ["Rancher", "Kubernetes", "容器管理", "云原生"]
 ---
+
+Rancher 是一个企业级 Kubernetes 管理平台，可统一管理多集群环境，简化容器基础设施的运维工作。本文介绍在 CentOS 上完成 Docker 安装、节点初始化及 Rancher 集群搭建的操作步骤。
 
 ## 系统准备
 

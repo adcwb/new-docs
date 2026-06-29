@@ -2,6 +2,7 @@
 title: "OpenVPN"
 weight: 40
 date: 2026-06-05
+tags: ["OpenVPN", "VPN", "网络", "安全"]
 ---
 
 ## 简介

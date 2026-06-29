@@ -1,7 +1,8 @@
 ---
 title: "ZooKeeper"
 weight: 85
-date: 2026-06-05
+date: 2026-06-27
+tags: ["ZooKeeper", "Distributed Coordination", "Middleware", "Operations"]
 ---
 
 {{< callout type="info" >}}

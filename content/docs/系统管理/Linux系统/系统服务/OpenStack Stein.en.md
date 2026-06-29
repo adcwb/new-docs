@@ -1,7 +1,8 @@
 ---
 title: "OpenStack Stein"
 weight: 165
-date: 2026-06-05
+date: 2026-06-27
+tags: ["OpenStack", "Cloud Computing", "Virtualization", "Operations"]
 ---
 
 {{< callout type="info" >}}

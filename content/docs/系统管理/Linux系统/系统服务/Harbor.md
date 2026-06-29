@@ -2,7 +2,10 @@
 title: "Harbor"
 weight: 110
 date: 2026-06-05
+tags: ["Harbor", "镜像仓库", "Docker", "云原生"]
 ---
+
+Harbor 是 CNCF 托管的企业级容器镜像仓库，支持基于角色的访问控制、镜像扫描和内容信任等安全特性。本文介绍从下载、TLS 证书生成到 Harbor 安装配置的完整流程。
 
 ## 下载 Harbor
 

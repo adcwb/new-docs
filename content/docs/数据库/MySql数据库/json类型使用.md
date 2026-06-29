@@ -1,7 +1,8 @@
----
+﻿---
 title: "json类型使用"
 weight: 80
 date: 2026-06-05
+tags: ["MySQL", "JSON", "数据类型"]
 ---
 
 ## JSON类型简介
@@ -661,7 +662,7 @@ func InitDB() (*gorm.DB, error) {
     
     return db, nil
 }
-```go
+```
 
 
 
@@ -806,7 +807,7 @@ func GetActiveUsersInBeijing(db *gorm.DB) ([]User, error) {
     }
     return users, nil
 }
-```go
+```
 
 
 
@@ -885,7 +886,7 @@ func DeleteUsersWithInactiveStatus(db *gorm.DB) error {
     
     return result.Error
 }
-```go
+```
 
 
 
@@ -933,7 +934,7 @@ func GetUsersWithPreference(db *gorm.DB, preference string) ([]User, error) {
     }
     return users, nil
 }
-```go
+```
 
 
 
@@ -986,7 +987,7 @@ func GetUserCity(db *gorm.DB, id uint) (string, error) {
     
     return city, err
 }
-```go
+```
 
 
 
@@ -1028,7 +1029,7 @@ func GetUserNamesWithDarkTheme(db *gorm.DB) ([]string, error) {
         Pluck("name", &names).Error
     return names, err
 }
-```go
+```
 
 
 
@@ -1126,7 +1127,7 @@ db.Where("JSON_CONTAINS(attributes->'$.ports', ?)", `"USB-C"`).Find(&products)
 // 迁移时添加索引
 db.Migrator().CreateIndex(&User{}, "profile_age_idx", "JSON_EXTRACT(profile, '$.age')")
 db.Migrator().CreateIndex(&User{}, "settings_theme_idx", "JSON_EXTRACT(settings, '$.theme')")
-```go
+```
 
 
 
@@ -1185,7 +1186,7 @@ func (j JSON) MarshalJSON() ([]byte, error)
 
 // 实现 json.Unmarshaler 接口
 func (j *JSON) UnmarshalJSON(b []byte) error
-```go
+```
 
 
 
@@ -1224,7 +1225,7 @@ JSONQuery("column").HasKey("field")
 JSONQuery("column").Equals(value, "path.to.field")
 JSONQuery("column").Likes(value, "path.to.field")
 JSONQuery("column").Extract("path.to.field")
-```go
+```
 
 实现原理：`Build` 方法根据不同的数据库方言生成相应的 SQL
 

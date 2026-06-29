@@ -1,7 +1,8 @@
 ---
 title: "Rancher"
 weight: 115
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Rancher", "Kubernetes", "Container Management", "Cloud Native"]
 ---
 
 {{< callout type="info" >}}

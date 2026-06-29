@@ -1,7 +1,8 @@
 ---
-title: "Gitlab"
+title: "GitLab"
 weight: 135
-date: 2026-06-05
+date: 2026-06-27
+tags: ["GitLab", "DevOps", "CI/CD", "Code Management"]
 ---
 
 {{< callout type="info" >}}

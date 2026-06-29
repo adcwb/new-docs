@@ -2,6 +2,7 @@
 title: "iptables"
 weight: 30
 date: 2026-06-05
+tags: ["iptables", "防火墙", "Linux", "网络"]
 ---
 
 ## 规则、表、链

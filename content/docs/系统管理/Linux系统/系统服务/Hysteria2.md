@@ -2,15 +2,16 @@
 title: "Hysteria2"
 weight: 50
 date: 2026-06-05
+tags: ["Hysteria2", "代理", "网络", "安全"]
 ---
 
-## Hysteria 2 服务安装配置指南
-
-Hysteria 是一个强大、快速、抗审查的代理工具，基于http 3
+Hysteria 2 是一款基于 HTTP/3（QUIC）协议的高性能、抗审查代理工具，具备出色的弱网穿透能力。本文介绍服务端的安装、TLS 证书生成、配置文件设置及客户端接入方法。
 
 官方文档：https://v2.hysteria.network/zh/docs/getting-started/Installation/
 
-### 1. 系统准备
+## Hysteria 2 服务安装配置指南
+
+### 系统准备
 
 ```bash
 # 更新系统软件包
@@ -22,7 +23,7 @@ sudo apt install -y wget curl openssl
 
 
 
-### 2. 安装服务端
+### 安装服务端
 
 ```bash
 # 使用官方脚本安装
@@ -31,7 +32,7 @@ bash <(curl -fsSL https://get.hy2.sh/)
 
 
 
-### 3. 生成 TLS 证书
+### 生成 TLS 证书
 
 ```bash
 # 创建证书目录
@@ -49,7 +50,7 @@ sudo chmod 600 /etc/hysteria/{cert.crt,private.key}
 
 
 
-### 4. 配置文件说明
+### 配置文件说明
 
 配置主文件`/etc/hysteria/config.yaml`
 
@@ -96,7 +97,7 @@ CPUSchedulingPriority=99   # 最高优先级（1-99）
 
 
 
-### 5. 防火墙配置
+### 防火墙配置
 
 ```bash
 # 对于 UFW：
@@ -117,7 +118,7 @@ sudo iptables-save > /etc/iptables/rules.v4
 
 
 
-### 6. 服务管理
+### 服务管理
 
 ```bash
 # 启动服务
@@ -135,7 +136,7 @@ journalctl -u hysteria-server.service -f
 
 
 
-### 7. 客户端配置示例
+### 客户端配置示例
 
 ```yaml
 server: your-server-ip:8088  # 服务器公网 IP 和端口
@@ -154,7 +155,7 @@ quic:
 
 
 
-### 8. 服务验证
+### 服务验证
 
 ```bash
 # 检查端口监听状态

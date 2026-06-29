@@ -1,7 +1,8 @@
 ---
 title: "Harbor"
 weight: 110
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Harbor", "Image Registry", "Docker", "Cloud Native"]
 ---
 
 {{< callout type="info" >}}

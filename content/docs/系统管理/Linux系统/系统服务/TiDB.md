@@ -2,6 +2,7 @@
 title: "TiDB"
 weight: 75
 date: 2026-06-05
+tags: ["TiDB", "分布式数据库", "MySQL兼容", "云原生"]
 ---
 
 TiDB 是一个 Golang 和 Rust 编写的开源分布式关系型数据库，是一个比较新的技术，从出生起就面向云原生，它的底层是 TiKV，TiKV 是 CNCF 的一个开源项目。

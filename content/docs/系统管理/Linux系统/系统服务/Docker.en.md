@@ -1,7 +1,8 @@
 ---
 title: "Docker"
 weight: 100
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Docker", "Container", "Operations", "Cloud Native"]
 ---
 
 {{< callout type="info" >}}

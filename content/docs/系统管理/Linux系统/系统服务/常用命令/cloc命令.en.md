@@ -1,7 +1,8 @@
 ---
-title: "cloc命令"
+title: "cloc Command"
 weight: 50
-date: 2026-06-05
+date: 2026-06-27
+tags: ["cloc", "Linux", "Code Statistics", "Command Line"]
 ---
 
 {{< callout type="info" >}}

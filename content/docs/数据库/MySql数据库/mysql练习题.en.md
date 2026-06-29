@@ -1,7 +1,8 @@
 ---
-title: "mysql练习题"
+title: "MySQL Practice Exercises"
 weight: 100
-date: 2026-06-05
+date: 2026-06-27
+tags: ["MySQL", "Practice", "SQL", "Query"]
 ---
 
 {{< callout type="info" >}}

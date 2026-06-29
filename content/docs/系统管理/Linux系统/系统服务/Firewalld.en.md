@@ -1,7 +1,8 @@
 ---
 title: "Firewalld"
 weight: 25
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Firewalld", "Firewall", "Linux", "Security"]
 ---
 
 {{< callout type="info" >}}

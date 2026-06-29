@@ -1,7 +1,8 @@
 ---
-title: "kafka"
+title: "Kafka"
 weight: 95
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Kafka", "Message Queue", "Big Data", "Middleware"]
 ---
 
 {{< callout type="info" >}}

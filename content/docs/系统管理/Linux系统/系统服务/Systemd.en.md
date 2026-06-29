@@ -1,7 +1,8 @@
 ---
 title: "Systemd"
 weight: 15
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Systemd", "Linux", "Service Management", "Operations"]
 ---
 
 {{< callout type="info" >}}

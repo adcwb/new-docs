@@ -2,7 +2,10 @@
 title: "Gitlab"
 weight: 135
 date: 2026-06-05
+tags: ["GitLab", "DevOps", "CI/CD", "代码管理"]
 ---
+
+GitLab 是一个开源的 Git 仓库管理平台，内置 CI/CD 流水线、代码审查、Issue 跟踪等功能，适合团队搭建私有化代码托管环境。本文介绍 GitLab CE 的安装、配置及数据迁移操作。
 
 ## Gitlab 安装
 

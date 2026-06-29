@@ -1,7 +1,8 @@
 ---
-title: "ceph存储"
+title: "Ceph Storage"
 weight: 155
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Ceph", "Distributed Storage", "Object Storage", "Operations"]
 ---
 
 {{< callout type="info" >}}

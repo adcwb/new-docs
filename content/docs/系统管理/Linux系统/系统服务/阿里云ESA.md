@@ -2,6 +2,7 @@
 title: "阿里云ESA"
 weight: 180
 date: 2026-06-05
+tags: ["阿里云", "ESA", "CDN", "IPv6"]
 ---
 
 利用阿里云ESA边缘加速实现80或443端口访问家宽IPv6

@@ -1,7 +1,8 @@
 ---
 title: "MongoDB"
 weight: 65
-date: 2026-06-05
+date: 2026-06-27
+tags: ["MongoDB", "NoSQL", "Database", "Operations"]
 ---
 
 {{< callout type="info" >}}

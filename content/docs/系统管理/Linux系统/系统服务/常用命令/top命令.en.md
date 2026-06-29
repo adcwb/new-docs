@@ -1,7 +1,8 @@
 ---
-title: "top命令"
+title: "top Command"
 weight: 50
-date: 2026-06-05
+date: 2026-06-27
+tags: ["top", "Linux", "System Monitoring", "Command Line"]
 ---
 
 {{< callout type="info" >}}

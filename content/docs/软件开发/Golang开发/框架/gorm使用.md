@@ -1,9 +1,13 @@
 ﻿---
 title: "GORM 使用指南"
 weight: 20
-date: 2026-06-05
+date: 2026-06-27
 tags: ["Go", "GORM", "ORM", "数据库"]
 ---
+
+GORM 是 Go 语言中最流行的 ORM（对象关系映射）库，它通过结构体标签将 Go 类型映射到数据库表，让开发者无需手写 SQL 即可完成增删改查、关联查询、事务管理等常见操作。
+
+本文以**图书管理系统**为贯穿示例，覆盖 GORM 的核心关联关系（Belongs To、Has One、Has Many、Many To Many、Polymorphism），以及预加载、级联操作、关联模式等进阶技巧。读完本文，你将能够正确定义模型间的各类关联，并掌握避免 N+1 查询的实用方法。
 
 ## 关联关系
 
@@ -245,7 +249,7 @@ db.Preload("Books", "rating > ?", 4.5).Find(&authors)
 
 ###  级联操作
 
-```text
+```go
 type Author struct {
     gorm.Model
     Books []Book `gorm:"constraint:OnDelete:SET NULL;"`
@@ -256,7 +260,7 @@ type Author struct {
 
 ### 关联模式操作
 
-```text
+```go
 // 直接操作关联关系
 db.Model(&author).Association("Books").Append(
     &Book{Title: "新书"}, 
@@ -271,7 +275,7 @@ db.Model(&book).Association("Genres").Clear()
 
 ### 连接表自定义属性
 
-```text
+```go
 db.SetupJoinTable(&Book{}, "Genres", &BookGenre{})
 ```
 
@@ -281,8 +285,7 @@ db.SetupJoinTable(&Book{}, "Genres", &BookGenre{})
 
 JSON类型支持
 
-```bash
+```text
 https://github.com/go-gorm/datatypes
-
 ```
 

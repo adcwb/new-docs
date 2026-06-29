@@ -2,6 +2,7 @@
 title: "Django补充"
 weight: 14
 date: 2026-06-23
+tags: ["Python", "Django", "Web框架"]
 ---
 
 {{< callout type="info" >}}

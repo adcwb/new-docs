@@ -2,6 +2,7 @@
 title: "OpenStack Stein"
 weight: 165
 date: 2026-06-05
+tags: ["OpenStack", "云计算", "虚拟化", "运维"]
 ---
 
 ## OpenStack安装

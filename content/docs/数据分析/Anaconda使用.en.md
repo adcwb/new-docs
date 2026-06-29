@@ -1,7 +1,8 @@
 ---
-title: "Anaconda使用"
+title: "Anaconda Usage Guide"
 weight: 10
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Python", "Anaconda", "Conda", "Virtual Environment", "Jupyter"]
 ---
 
 {{< callout type="info" >}}

@@ -1,7 +1,8 @@
 ---
 title: "Frp"
 weight: 45
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Frp", "Intranet Tunneling", "Reverse Proxy", "Operations"]
 ---
 
 {{< callout type="info" >}}

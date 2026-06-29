@@ -1,7 +1,8 @@
 ---
 title: "Ansible"
 weight: 140
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Ansible", "Automation", "DevOps", "Linux"]
 ---
 
 {{< callout type="info" >}}

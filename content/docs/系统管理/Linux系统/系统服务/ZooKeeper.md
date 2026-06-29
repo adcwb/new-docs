@@ -2,9 +2,12 @@
 title: "ZooKeeper"
 weight: 85
 date: 2026-06-05
+tags: ["ZooKeeper", "分布式协调", "中间件", "运维"]
 ---
 
-下载最先版本的 Zookeeper：
+ZooKeeper 是 Apache 基金会的开源分布式协调服务，提供配置管理、命名注册、分布式锁等功能，是 Kafka、HBase 等大数据组件的重要依赖。本文介绍单机启动与集群部署的操作步骤。
+
+下载最新版本的 ZooKeeper：
 
 ```bash
 $ wget https://mirror-hk.koddos.net/apache/zookeeper/zookeeper-3.6.1/apache-zookeeper-3.6.1-bin.tar.gz

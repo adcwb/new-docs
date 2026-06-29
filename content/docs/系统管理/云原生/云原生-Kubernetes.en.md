@@ -1,7 +1,8 @@
 ---
-title: "Cloud Native-Kubernetes"
+title: "Cloud Native - Kubernetes"
 weight: 10
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Kubernetes", "Container Orchestration", "Cloud Native", "Operations"]
 ---
 
 {{< callout type="info" >}}

@@ -2,6 +2,7 @@
 title: "form组件"
 weight: 15
 date: 2026-06-23
+tags: ["Python", "Django", "Web框架"]
 ---
 
 {{< callout type="info" >}}

@@ -1,7 +1,8 @@
 ---
-title: "Ubuntu桌面美化"
+title: "Ubuntu Desktop Customization"
 weight: 170
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Ubuntu", "Desktop", "Customization", "Linux"]
 ---
 
 {{< callout type="info" >}}

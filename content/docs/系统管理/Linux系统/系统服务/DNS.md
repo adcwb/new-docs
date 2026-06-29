@@ -2,6 +2,7 @@
 title: "DNS"
 weight: 35
 date: 2026-06-05
+tags: ["DNS", "网络", "运维", "Linux"]
 ---
 
 https://mp.weixin.qq.com/s/vwGlL7xNXszTr6mEKLXtZA

@@ -1,7 +1,8 @@
 ---
-title: "Pandas使用"
+title: "Pandas Usage Guide"
 weight: 30
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Python", "Pandas", "Data Analysis", "DataFrame"]
 ---
 
 {{< callout type="info" >}}

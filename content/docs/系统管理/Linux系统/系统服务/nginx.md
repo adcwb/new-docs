@@ -2,7 +2,10 @@
 title: "nginx"
 weight: 125
 date: 2026-06-05
+tags: ["Nginx", "Web服务器", "反向代理", "Linux"]
 ---
+
+Nginx 是高性能的 HTTP 服务器和反向代理，以低内存占用和高并发能力著称，广泛用于静态资源托管、负载均衡和 API 网关场景。本文介绍在 RHEL/CentOS 和 Debian/Ubuntu 上的安装方式及常用配置。
 
 Nginx 官方文档：http://nginx.org/en/docs/
 

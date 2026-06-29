@@ -2,7 +2,10 @@
 title: "Frp"
 weight: 45
 date: 2026-06-05
+tags: ["Frp", "内网穿透", "反向代理", "运维"]
 ---
+
+Frp 是一款高性能的内网穿透工具，支持 TCP/UDP/HTTP/HTTPS 协议转发，可将内网服务暴露到公网访问。本文介绍在 CentOS 上安装 frp 客户端（frpc）与服务端（frps）的完整步骤及 Systemd 服务配置。
 
 ## CentOS 安装frp
 

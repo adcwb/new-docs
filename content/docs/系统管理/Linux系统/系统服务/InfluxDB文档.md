@@ -2,6 +2,7 @@
 title: "InfluxDB文档"
 weight: 70
 date: 2026-06-05
+tags: ["InfluxDB", "时序数据库", "监控", "运维"]
 ---
 
 ## 简介

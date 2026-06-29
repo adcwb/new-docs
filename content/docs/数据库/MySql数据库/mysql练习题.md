@@ -2,6 +2,7 @@
 title: "mysql练习题"
 weight: 100
 date: 2026-06-05
+tags: ["MySQL", "练习", "SQL", "查询"]
 ---
 
 ## [mysql作业]

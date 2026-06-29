@@ -1,7 +1,8 @@
 ---
 title: "MySQL"
 weight: 55
-date: 2026-06-05
+date: 2026-06-27
+tags: ["MySQL", "Database", "SQL", "Operations"]
 ---
 
 {{< callout type="info" >}}

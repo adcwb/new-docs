@@ -2,7 +2,10 @@
 title: "MySQL"
 weight: 55
 date: 2026-06-05
+tags: ["MySQL", "数据库", "SQL", "运维"]
 ---
+
+MySQL 是最广泛使用的开源关系型数据库，以高性能、高可靠性著称。本文介绍在 CentOS 7 上安装 MySQL 5.7、配置数据目录与主从复制参数，以及完成初始化和主从搭建的操作步骤。
 
 ## CentOS7安装MySql
 

@@ -1,7 +1,8 @@
 ---
 title: "Jenkins"
 weight: 130
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Jenkins", "CI/CD", "DevOps", "Automation"]
 ---
 
 {{< callout type="info" >}}

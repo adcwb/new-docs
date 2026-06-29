@@ -1,7 +1,8 @@
 ---
-title: "阿里云ESA"
+title: "Alibaba Cloud ESA"
 weight: 180
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Alibaba Cloud", "ESA", "CDN", "IPv6"]
 ---
 
 {{< callout type="info" >}}

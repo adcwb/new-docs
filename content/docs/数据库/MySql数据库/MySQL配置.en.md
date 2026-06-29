@@ -1,7 +1,8 @@
 ---
-title: "MySQL配置"
+title: "MySQL Configuration"
 weight: 90
-date: 2026-06-05
+date: 2026-06-27
+tags: ["MySQL", "Configuration", "Operations"]
 ---
 
 {{< callout type="info" >}}

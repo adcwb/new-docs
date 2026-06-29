@@ -2,6 +2,7 @@
 title: "Firewalld"
 weight: 25
 date: 2026-06-05
+tags: ["Firewalld", "防火墙", "Linux", "安全"]
 ---
 
 ## 防火墙安全基本概述

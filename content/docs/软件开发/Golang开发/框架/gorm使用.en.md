@@ -1,8 +1,8 @@
 ---
-title: "GORM 使用指南"
+title: "GORM Usage Guide"
 weight: 20
-date: 2026-06-05
-tags: ["Go", "GORM", "ORM", "数据库"]
+date: 2026-06-27
+tags: ["Go", "GORM", "ORM", "Database"]
 ---
 
 {{< callout type="info" >}}

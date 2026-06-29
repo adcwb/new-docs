@@ -2,7 +2,10 @@
 title: "Ubuntu桌面美化"
 weight: 170
 date: 2026-06-05
+tags: ["Ubuntu", "桌面", "美化", "Linux"]
 ---
+
+本文介绍 Ubuntu 桌面环境的个性化美化方案，包括 Conky 系统监控悬浮窗的配置、主题与图标的替换，以及其他常用桌面美化工具的使用技巧。
 
 `.conkyrc`配置文件
 

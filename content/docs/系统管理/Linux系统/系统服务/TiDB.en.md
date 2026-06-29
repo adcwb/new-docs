@@ -1,7 +1,8 @@
 ---
 title: "TiDB"
 weight: 75
-date: 2026-06-05
+date: 2026-06-27
+tags: ["TiDB", "Distributed Database", "MySQL Compatible", "Cloud Native"]
 ---
 
 {{< callout type="info" >}}

@@ -1,7 +1,8 @@
 ---
-title: "Numpy使用"
+title: "NumPy Usage Guide"
 weight: 20
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Python", "NumPy", "Data Analysis", "Scientific Computing"]
 ---
 
 {{< callout type="info" >}}

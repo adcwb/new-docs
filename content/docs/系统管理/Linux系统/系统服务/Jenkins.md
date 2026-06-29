@@ -2,7 +2,10 @@
 title: "Jenkins"
 weight: 130
 date: 2026-06-05
+tags: ["Jenkins", "CI/CD", "DevOps", "自动化"]
 ---
+
+Jenkins 是最广泛使用的开源持续集成/持续交付（CI/CD）平台，支持通过丰富的插件体系对接各类代码仓库、构建工具和部署环境。本文介绍在 CentOS 7 上安装 Jenkins、修改端口及配置插件源的基本操作。
 
 ## Jenkins 安装
 

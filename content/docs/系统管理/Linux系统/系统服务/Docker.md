@@ -2,7 +2,10 @@
 title: "Docker"
 weight: 100
 date: 2026-06-05
+tags: ["Docker", "容器", "运维", "云原生"]
 ---
+
+Docker 是目前最流行的容器引擎，通过镜像和容器机制实现应用的快速打包与部署。本文涵盖 CentOS 和 Ubuntu 下的安装方式、镜像加速配置，以及 Docker Compose 的常用操作，帮助读者快速上手容器化工作流。
 
 ## CentOS 7 安装docker
 

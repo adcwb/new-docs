@@ -1,7 +1,8 @@
 ---
 title: "iptables"
 weight: 30
-date: 2026-06-05
+date: 2026-06-27
+tags: ["iptables", "Firewall", "Linux", "Networking"]
 ---
 
 {{< callout type="info" >}}

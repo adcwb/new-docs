@@ -1,7 +1,8 @@
 ---
-title: "lsof命令"
+title: "lsof Command"
 weight: 50
-date: 2026-06-05
+date: 2026-06-27
+tags: ["lsof", "Linux", "System Monitoring", "Command Line"]
 ---
 
 {{< callout type="info" >}}

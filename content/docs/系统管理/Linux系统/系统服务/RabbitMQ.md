@@ -2,6 +2,7 @@
 title: "RabbitMQ"
 weight: 90
 date: 2026-06-05
+tags: ["RabbitMQ", "消息队列", "中间件", "运维"]
 ---
 
 ## RabbitMQ安装

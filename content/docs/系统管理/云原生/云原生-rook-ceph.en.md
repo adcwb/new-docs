@@ -1,7 +1,8 @@
 ---
-title: "Cloud Native-rook-ceph"
+title: "Cloud Native - Rook-Ceph"
 weight: 20
-date: 2026-06-05
+date: 2026-06-27
+tags: ["Rook", "Ceph", "Distributed Storage", "Cloud Native"]
 ---
 
 {{< callout type="info" >}}
