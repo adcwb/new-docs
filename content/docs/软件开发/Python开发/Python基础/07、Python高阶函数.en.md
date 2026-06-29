@@ -1,5 +1,5 @@
 ---
-title: "Python高阶函数"
+title: "Python Higher-Order Functions"
 weight: 7
 date: 2026-06-23
 tags: ["Python", "装饰器", "迭代器", "生成器", "高阶函数"]

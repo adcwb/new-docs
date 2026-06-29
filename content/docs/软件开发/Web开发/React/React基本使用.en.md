@@ -1,5 +1,5 @@
 ---
-title: "React 基本使用"
+title: "React Basic Usage"
 weight: 10
 date: 2026-06-05
 tags: ["Web", "React", "前端", "JSX", "组件"]

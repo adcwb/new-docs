@@ -1,5 +1,5 @@
 ---
-title: "Actix-web 入门"
+title: "Getting Started with Actix-web"
 weight: 10
 date: 2026-06-16
 tags: ["Rust", "Actix-web", "Web框架"]

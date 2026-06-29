@@ -1,5 +1,5 @@
 ---
-title: "Python 操作 Jenkins"
+title: "Python for Jenkins"
 weight: 3
 date: 2026-06-23
 tags: ["Python", "Jenkins", "CI/CD", "自动化"]

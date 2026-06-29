@@ -1,5 +1,5 @@
 ---
-title: "Django补充"
+title: "Django Supplementary Notes"
 weight: 14
 date: 2026-06-23
 tags: ["Python", "Django", "Web框架"]

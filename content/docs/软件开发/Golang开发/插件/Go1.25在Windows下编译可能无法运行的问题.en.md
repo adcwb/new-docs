@@ -1,5 +1,5 @@
 ---
-title: "Go 1.25 Windows 编译兼容问题"
+title: "Go 1.25 Windows Build Compatibility Issue"
 weight: 40
 date: 2026-06-05
 tags: ["Go", "Windows", "编译", "兼容性"]

@@ -1,5 +1,5 @@
 ---
-title: "Angular 入门"
+title: "Angular Getting Started"
 weight: 10
 date: 2026-06-05
 tags: ["Web", "Angular", "前端", "TypeScript", "框架"]

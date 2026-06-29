@@ -1,5 +1,5 @@
 ---
-title: "OAuth2 授权"
+title: "OAuth2 Authorization"
 weight: 20
 date: 2026-06-05
 tags: ["Go", "OAuth2", "认证", "JWT"]

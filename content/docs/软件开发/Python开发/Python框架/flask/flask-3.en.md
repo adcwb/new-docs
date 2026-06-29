@@ -1,5 +1,5 @@
 ---
-title: "Flask SQLAlchemy Databases"
+title: "Flask SQLAlchemy Database"
 weight: 3
 date: 2026-06-23
 tags: ["Python", "Flask", "SQLAlchemy", "ORM", "数据库"]

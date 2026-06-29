@@ -1,5 +1,5 @@
 ---
-title: "PHP 与Databases"
+title: "PHP and Databases"
 weight: 60
 date: 2026-06-16
 ---

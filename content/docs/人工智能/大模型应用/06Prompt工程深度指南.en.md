@@ -1,5 +1,5 @@
 ---
-title: "Prompt Engineering 深度指南"
+title: "Prompt Engineering Deep Guide"
 weight: 6
 date: 2026-06-18
 tags: ["Prompt Engineering", "LLM", "CoT", "ReAct", "DSPy"]

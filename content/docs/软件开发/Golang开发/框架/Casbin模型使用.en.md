@@ -1,5 +1,5 @@
 ---
-title: "Casbin 权限Models & Patterns"
+title: "Casbin Permission Model"
 weight: 30
 date: 2026-06-05
 tags: ["Go", "Casbin", "权限控制", "RBAC"]

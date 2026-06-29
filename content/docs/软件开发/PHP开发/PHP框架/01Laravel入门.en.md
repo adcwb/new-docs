@@ -1,5 +1,5 @@
 ---
-title: "Laravel 入门"
+title: "Laravel Getting Started"
 weight: 1
 date: 2026-06-16
 tags: ["PHP", "Laravel", "框架"]

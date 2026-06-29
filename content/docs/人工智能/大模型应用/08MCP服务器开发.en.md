@@ -1,5 +1,5 @@
 ---
-title: "MCP 服务器开发"
+title: "MCP Server Development"
 weight: 8
 date: 2026-06-18
 tags: ["MCP", "Model Context Protocol", "FastMCP", "工具开发"]

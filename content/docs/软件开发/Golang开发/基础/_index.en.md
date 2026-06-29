@@ -1,5 +1,5 @@
 ---
-title: "Fundamentals入门"
+title: "Fundamentals"
 weight: 10
 ---
 

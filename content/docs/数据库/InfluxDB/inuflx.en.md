@@ -1,5 +1,5 @@
 ---
-title: "inuflx"
+title: "InfluxDB Notes"
 weight: 60
 date: 2026-06-05
 ---

@@ -1,5 +1,5 @@
 ---
-title: "卷积神经网络（CNN）"
+title: "Convolutional Neural Networks (CNN)"
 weight: 3
 date: 2026-06-18
 tags: ["深度学习", "CNN", "卷积", "图像识别", "PyTorch"]

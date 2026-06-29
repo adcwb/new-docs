@@ -1,5 +1,5 @@
 ---
-title: "Python高级编程"
+title: "Python Advanced Programming"
 weight: 10
 date: 2026-06-23
 tags: ["Python", "OOP", "面向对象", "类型注解"]

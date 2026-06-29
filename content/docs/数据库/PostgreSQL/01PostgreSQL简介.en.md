@@ -1,5 +1,5 @@
 ---
-title: "PostgreSQL 简介"
+title: "PostgreSQL Introduction"
 weight: 10
 date: 2026-06-16
 tags: ["PostgreSQL", "数据库", "入门"]

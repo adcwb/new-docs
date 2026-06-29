@@ -1,5 +1,5 @@
 ---
-title: "Finance & Trading"
+title: "Finance and Trading"
 weight: 8
 ---
 

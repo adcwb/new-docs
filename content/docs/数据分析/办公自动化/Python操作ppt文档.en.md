@@ -1,5 +1,5 @@
 ---
-title: "Python操作ppt文档"
+title: "Python for PowerPoint Documents"
 weight: 40
 date: 2026-06-05
 ---

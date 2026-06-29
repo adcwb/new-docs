@@ -1,5 +1,5 @@
 ---
-title: "Plugins与工具"
+title: "Plugins and Tools"
 weight: 20
 ---
 

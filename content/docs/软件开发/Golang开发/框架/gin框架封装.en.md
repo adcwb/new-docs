@@ -1,5 +1,5 @@
 ---
-title: "Gin Frameworks封装"
+title: "Gin Framework Wrapper"
 weight: 10
 date: 2026-06-05
 tags: ["Go", "Gin", "Web框架", "中间件"]

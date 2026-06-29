@@ -1,5 +1,5 @@
 ---
-title: "form组件"
+title: "Form Component"
 weight: 15
 date: 2026-06-23
 tags: ["Python", "Django", "Web框架"]

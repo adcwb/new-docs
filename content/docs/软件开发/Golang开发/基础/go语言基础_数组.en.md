@@ -1,5 +1,5 @@
 ---
-title: "数组"
+title: "Arrays"
 weight: 60
 date: 2026-06-05
 tags: ["Go", "数组", "数据结构"]

@@ -1,5 +1,5 @@
 ---
-title: "Python常用模块"
+title: "Python Common Modules"
 weight: 9
 date: 2026-06-23
 tags: ["Python", "标准库", "模块", "pathlib", "logging"]

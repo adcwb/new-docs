@@ -1,5 +1,5 @@
 ---
-title: "Agent 架构双轴Frameworks：七脉六式"
+title: "Agent Architecture Dual-Axis Framework"
 weight: 11
 date: 2026-06-24
 tags: ["Agent", "架构", "Multi-Agent", "复合错误", "技术选型"]

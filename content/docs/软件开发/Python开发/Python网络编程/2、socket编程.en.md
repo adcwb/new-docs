@@ -1,5 +1,5 @@
 ---
-title: "Socket 编程"
+title: "Socket Programming"
 weight: 2
 date: 2026-06-23
 tags: ["Python", "Socket", "TCP", "UDP", "网络编程"]

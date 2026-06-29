@@ -1,5 +1,5 @@
 ---
-title: "接口"
+title: "Interfaces"
 weight: 120
 date: 2026-06-05
 tags: ["Go", "接口", "多态", "鸭子类型"]

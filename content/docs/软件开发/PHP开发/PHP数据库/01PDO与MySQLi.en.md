@@ -1,5 +1,5 @@
 ---
-title: "PDO 与 MySQLi"
+title: "PDO and MySQLi"
 weight: 1
 date: 2026-06-16
 tags: ["PHP", "数据库", "PDO", "MySQLi"]

@@ -1,5 +1,5 @@
 ---
-title: "Python操作world文档"
+title: "Python for Word Documents"
 weight: 10
 date: 2026-06-05
 ---

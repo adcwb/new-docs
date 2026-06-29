@@ -1,5 +1,5 @@
 ---
-title: "函数"
+title: "Functions"
 weight: 90
 date: 2026-06-05
 tags: ["Go", "函数", "闭包", "匿名函数"]

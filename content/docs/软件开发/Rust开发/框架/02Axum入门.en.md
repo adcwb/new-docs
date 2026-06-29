@@ -1,5 +1,5 @@
 ---
-title: "Axum 入门"
+title: "Getting Started with Axum"
 weight: 20
 date: 2026-06-16
 tags: ["Rust", "Axum", "Web框架", "Tokio"]

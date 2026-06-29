@@ -1,5 +1,5 @@
 ---
-title: "RAG 检索增强生成"
+title: "RAG: Retrieval-Augmented Generation"
 weight: 3
 date: 2026-06-16
 tags: ["LLM", "RAG", "向量检索"]

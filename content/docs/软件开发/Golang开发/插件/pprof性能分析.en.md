@@ -1,5 +1,5 @@
 ---
-title: "pprof 性能分析"
+title: "pprof Performance Analysis"
 weight: 30
 date: 2026-06-05
 tags: ["Go", "pprof", "性能", "profiling"]

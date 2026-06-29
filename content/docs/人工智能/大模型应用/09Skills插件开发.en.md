@@ -1,5 +1,5 @@
 ---
-title: "Skills 与Plugins开发"
+title: "Skills and Plugin Development"
 weight: 9
 date: 2026-06-18
 tags: ["Skills", "Plugin", "Tool Use", "工具注册", "LLM插件"]

@@ -1,5 +1,5 @@
 ---
-title: "依赖包管理（Go Modules）"
+title: "Dependency Management (Go Modules)"
 weight: 190
 date: 2026-06-05
 tags: ["Go", "go mod", "模块", "依赖管理"]

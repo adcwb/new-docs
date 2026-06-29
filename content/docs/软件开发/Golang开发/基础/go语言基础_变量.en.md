@@ -1,5 +1,5 @@
 ---
-title: "安装与变量"
+title: "Installation and Variables"
 weight: 20
 date: 2026-06-05
 tags: ["Go", "安装", "变量", "常量"]

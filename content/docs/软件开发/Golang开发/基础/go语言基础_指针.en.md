@@ -1,5 +1,5 @@
 ---
-title: "指针"
+title: "Pointers"
 weight: 100
 date: 2026-06-05
 tags: ["Go", "指针", "内存"]

@@ -1,5 +1,5 @@
 ---
-title: "PHP 简介与环境搭建"
+title: "PHP Introduction and Environment Setup"
 weight: 1
 date: 2026-06-16
 tags: ["PHP", "入门", "环境"]

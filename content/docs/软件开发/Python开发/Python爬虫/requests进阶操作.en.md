@@ -1,5 +1,5 @@
 ---
-title: "requestsAdvanced操作"
+title: "requests Advanced Operations"
 weight: 2
 date: 2026-06-23
 tags: ["Python", "爬虫", "requests", "Session", "代理", "并发"]

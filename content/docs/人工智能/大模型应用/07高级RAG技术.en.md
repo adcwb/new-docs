@@ -1,5 +1,5 @@
 ---
-title: "高级 RAG 技术"
+title: "Advanced RAG Techniques"
 weight: 7
 date: 2026-06-18
 tags: ["RAG", "HyDE", "RAPTOR", "Reranking", "混合检索"]

@@ -1,5 +1,5 @@
 ---
-title: "RESTful & DRF Getting Started"
+title: "RESTful and DRF Getting Started"
 weight: 10
 date: 2026-06-29
 tags: ["Python", "Django", "DRF", "REST", "API"]

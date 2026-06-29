@@ -1,5 +1,5 @@
 ---
-title: "Python 发送邮件"
+title: "Sending Email with Python"
 weight: 1
 date: 2026-06-23
 tags: ["Python", "邮件", "smtplib", "SMTP"]

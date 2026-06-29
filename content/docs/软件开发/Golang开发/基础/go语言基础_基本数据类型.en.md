@@ -1,5 +1,5 @@
 ---
-title: "基本数据类型"
+title: "Basic Data Types"
 weight: 30
 date: 2026-06-05
 tags: ["Go", "数据类型", "字符串", "整型"]

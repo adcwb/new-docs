@@ -1,5 +1,5 @@
 ---
-title: "Transformer 与注意力机制"
+title: "Transformer and Attention Mechanisms"
 weight: 2
 date: 2026-06-16
 tags: ["深度学习", "Transformer", "注意力机制", "LLM"]

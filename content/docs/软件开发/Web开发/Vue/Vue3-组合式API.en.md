@@ -1,5 +1,5 @@
 ---
-title: "Vue 3 组合式 API"
+title: "Vue 3 Composition API"
 weight: 30
 date: 2026-06-26
 tags: ["Vue", "Vue3", "组合式API", "Composition API", "前端"]

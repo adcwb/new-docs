@@ -1,5 +1,5 @@
 ---
-title: "Python内置函数"
+title: "Python Built-in Functions"
 weight: 6
 date: 2026-06-23
 tags: ["Python", "内置函数", "魔术方法", "dunder"]

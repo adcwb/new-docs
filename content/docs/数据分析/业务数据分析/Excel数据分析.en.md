@@ -1,5 +1,5 @@
 ---
-title: "ExcelData Analysis"
+title: "Excel Data Analysis"
 weight: 20
 date: 2026-06-05
 ---

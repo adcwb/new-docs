@@ -1,5 +1,5 @@
 ---
-title: "CentOS环境安装"
+title: "CentOS Environment Setup"
 weight: 5
 date: 2026-06-23
 ---

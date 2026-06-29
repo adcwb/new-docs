@@ -1,5 +1,5 @@
 ---
-title: "包"
+title: "Packages"
 weight: 130
 date: 2026-06-05
 tags: ["Go", "包", "模块", "可见性"]

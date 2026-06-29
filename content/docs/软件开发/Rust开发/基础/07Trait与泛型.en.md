@@ -1,5 +1,5 @@
 ---
-title: "Trait 与泛型"
+title: "Traits and Generics"
 weight: 70
 date: 2026-06-16
 tags: ["Rust", "Trait", "泛型", "接口"]

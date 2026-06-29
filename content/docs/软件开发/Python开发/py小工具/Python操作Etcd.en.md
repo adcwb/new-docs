@@ -1,5 +1,5 @@
 ---
-title: "Python 操作 Etcd"
+title: "Python for Etcd"
 weight: 2
 date: 2026-06-23
 tags: ["Python", "Etcd", "分布式", "KV存储"]

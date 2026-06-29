@@ -1,5 +1,5 @@
 ---
-title: "Kali 渗透"
+title: "Kali Penetration Testing"
 weight: 20
 ---
 

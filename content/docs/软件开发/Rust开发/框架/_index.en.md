@@ -1,5 +1,5 @@
 ---
-title: "Frameworks"
+title: "Rust Frameworks"
 weight: 30
 date: 2026-06-16
 ---

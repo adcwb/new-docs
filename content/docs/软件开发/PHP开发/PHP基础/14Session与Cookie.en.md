@@ -1,5 +1,5 @@
 ---
-title: "Session 与 Cookie"
+title: "Session and Cookie"
 weight: 14
 date: 2026-06-16
 tags: ["PHP", "Session", "Cookie", "安全"]

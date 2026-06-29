@@ -1,5 +1,5 @@
 ---
-title: "Python函数使用"
+title: "Python Functions"
 weight: 5
 date: 2026-06-23
 tags: ["Python", "函数", "闭包", "作用域"]

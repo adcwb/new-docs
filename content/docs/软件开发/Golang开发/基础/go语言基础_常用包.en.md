@@ -1,5 +1,5 @@
 ---
-title: "常用标准库"
+title: "Common Standard Libraries"
 weight: 160
 date: 2026-06-05
 tags: ["Go", "标准库", "fmt", "strings", "time"]

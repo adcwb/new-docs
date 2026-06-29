@@ -1,5 +1,5 @@
 ---
-title: "交叉编译"
+title: "Cross-Compilation"
 weight: 180
 date: 2026-06-05
 tags: ["Go", "交叉编译", "CGO", "构建"]

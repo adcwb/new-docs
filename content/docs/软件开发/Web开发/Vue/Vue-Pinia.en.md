@@ -1,5 +1,5 @@
 ---
-title: "Pinia 状态管理"
+title: "Pinia State Management"
 weight: 50
 date: 2026-06-26
 tags: ["Vue", "Pinia", "状态管理", "前端", "Vue3"]

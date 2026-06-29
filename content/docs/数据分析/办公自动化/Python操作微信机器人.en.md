@@ -1,5 +1,5 @@
 ---
-title: "Python操作微信机器人"
+title: "Python for WeChat Bots"
 weight: 50
 date: 2026-06-05
 ---

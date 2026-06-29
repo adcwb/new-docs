@@ -1,5 +1,5 @@
 ---
-title: "Angular 路由与响应式表单"
+title: "Angular Routing and Reactive Forms"
 weight: 30
 date: 2026-06-26
 tags: ["Angular", "路由", "响应式表单", "HttpClient", "前端"]

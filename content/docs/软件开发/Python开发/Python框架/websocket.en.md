@@ -1,5 +1,5 @@
 ---
-title: "websocket"
+title: "WebSocket"
 weight: 5
 date: 2026-06-23
 tags: ["Python", "WebSocket", "网络协议"]

@@ -1,5 +1,5 @@
 ---
-title: "requests基本操作"
+title: "requests Basic Operations"
 weight: 1
 date: 2026-06-23
 tags: ["Python", "爬虫", "requests", "HTTP"]

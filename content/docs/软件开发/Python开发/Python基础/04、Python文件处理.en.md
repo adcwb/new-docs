@@ -1,5 +1,5 @@
 ---
-title: "Python文件处理"
+title: "Python File Handling"
 weight: 4
 date: 2026-06-23
 tags: ["Python", "文件IO", "pathlib", "编码"]

@@ -1,5 +1,5 @@
 ---
-title: "ScrapyFrameworks"
+title: "Scrapy Framework"
 weight: 4
 date: 2026-06-23
 ---

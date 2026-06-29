@@ -1,5 +1,5 @@
 ---
-title: "ThinkPHP 入门"
+title: "ThinkPHP Getting Started"
 weight: 2
 date: 2026-06-16
 tags: ["PHP", "ThinkPHP", "框架"]

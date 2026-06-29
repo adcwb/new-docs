@@ -1,5 +1,5 @@
 ---
-title: "FlaskFundamentals"
+title: "Flask Fundamentals"
 weight: 1
 date: 2026-06-23
 tags: ["Python", "Flask", "Web框架", "HTTP"]

@@ -1,5 +1,5 @@
 ---
-title: "切片 Slice"
+title: "Slice"
 weight: 70
 date: 2026-06-05
 tags: ["Go", "切片", "数据结构"]

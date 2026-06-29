@@ -1,5 +1,5 @@
 ---
-title: "流程控制"
+title: "Flow Control"
 weight: 50
 date: 2026-06-05
 tags: ["Go", "流程控制", "for", "switch"]

@@ -1,5 +1,5 @@
 ---
-title: "双因素认证（2FA）"
+title: "Two-Factor Authentication (2FA)"
 weight: 10
 date: 2026-06-05
 tags: ["Go", "2FA", "安全", "TOTP"]

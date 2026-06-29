@@ -1,5 +1,5 @@
 ---
-title: "Deep Learning"
+title: "Deep Learning Fundamentals"
 weight: 2
 ---
 

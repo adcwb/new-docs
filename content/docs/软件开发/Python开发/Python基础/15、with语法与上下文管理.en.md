@@ -1,5 +1,5 @@
 ---
-title: "with语法与上下文管理"
+title: "with Statement and Context Managers"
 weight: 15
 date: 2026-06-23
 tags: ["Python", "上下文管理器", "with", "contextlib"]

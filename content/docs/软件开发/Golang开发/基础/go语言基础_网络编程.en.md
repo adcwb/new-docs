@@ -1,5 +1,5 @@
 ---
-title: "网络编程"
+title: "Network Programming"
 weight: 170
 date: 2026-06-05
 tags: ["Go", "网络", "TCP", "UDP", "HTTP"]

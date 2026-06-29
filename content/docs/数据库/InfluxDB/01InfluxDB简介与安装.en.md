@@ -1,5 +1,5 @@
 ---
-title: "InfluxDB 简介与安装"
+title: "InfluxDB Introduction and Installation"
 weight: 10
 date: 2026-06-16
 tags: ["InfluxDB", "时序数据库", "Docker", "入门"]

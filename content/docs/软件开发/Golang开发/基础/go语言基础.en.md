@@ -1,5 +1,5 @@
 ---
-title: "Go 语言简介"
+title: "Go Language Introduction"
 weight: 10
 date: 2026-06-05
 tags: ["Go", "入门", "简介"]

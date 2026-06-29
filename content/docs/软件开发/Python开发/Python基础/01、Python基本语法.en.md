@@ -1,5 +1,5 @@
 ---
-title: "Python基本语法"
+title: "Python Basic Syntax"
 weight: 1
 date: 2026-06-23
 tags: ["Python", "基础语法", "入门"]

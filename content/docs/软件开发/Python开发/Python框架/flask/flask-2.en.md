@@ -1,5 +1,5 @@
 ---
-title: "Flask Jinja2 模板"
+title: "Flask Jinja2 Templates"
 weight: 2
 date: 2026-06-23
 tags: ["Python", "Flask", "Jinja2", "模板"]

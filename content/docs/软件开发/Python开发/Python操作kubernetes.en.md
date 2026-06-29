@@ -1,5 +1,5 @@
 ---
-title: "Python操作kubernetes"
+title: "Python for Kubernetes"
 weight: 70
 date: 2026-06-23
 ---

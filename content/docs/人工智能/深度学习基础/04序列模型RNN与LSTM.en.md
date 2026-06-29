@@ -1,5 +1,5 @@
 ---
-title: "序列Models & Patterns：RNN 与 LSTM"
+title: "Sequence Models: RNN and LSTM"
 weight: 4
 date: 2026-06-18
 tags: ["深度学习", "RNN", "LSTM", "时间序列", "序列建模"]

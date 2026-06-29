@@ -1,5 +1,5 @@
 ---
-title: "Python操作pdf文档"
+title: "Python for PDF Documents"
 weight: 20
 date: 2026-06-05
 ---

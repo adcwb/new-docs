@@ -1,5 +1,5 @@
 ---
-title: "Python操作execl表格"
+title: "Python for Excel Spreadsheets"
 weight: 30
 date: 2026-06-05
 ---

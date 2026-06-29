@@ -1,5 +1,5 @@
 ---
-title: "Angular 核心概念"
+title: "Angular Core Concepts"
 weight: 20
 date: 2026-06-26
 tags: ["Angular", "Angular 19", "Signals", "组件", "前端", "TypeScript"]

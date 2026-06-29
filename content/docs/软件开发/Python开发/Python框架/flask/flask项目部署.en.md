@@ -1,5 +1,5 @@
 ---
-title: "flask项目部署"
+title: "Flask Project Deployment"
 weight: 4
 date: 2026-06-23
 tags: ["Python", "Flask", "Web框架", "部署"]

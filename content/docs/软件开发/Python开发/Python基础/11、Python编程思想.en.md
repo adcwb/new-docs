@@ -1,5 +1,5 @@
 ---
-title: "Python编程思想"
+title: "Python Programming Paradigms"
 weight: 11
 date: 2026-06-23
 tags: ["Python", "编程范式", "面向过程", "面向对象", "函数式"]

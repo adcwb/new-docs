@@ -1,5 +1,5 @@
 ---
-title: "并发编程"
+title: "Concurrent Programming"
 weight: 140
 date: 2026-06-05
 tags: ["Go", "goroutine", "channel", "并发", "sync"]

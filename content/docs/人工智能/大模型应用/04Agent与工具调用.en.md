@@ -1,5 +1,5 @@
 ---
-title: "Agent 与工具调用"
+title: "Agent and Tool Calling"
 weight: 4
 date: 2026-06-16
 tags: ["LLM", "Agent", "Tool Use", "Claude"]
