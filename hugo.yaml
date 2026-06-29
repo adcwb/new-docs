@@ -2,7 +2,7 @@
 # Hugo + Hextra 站点配置
 # 多语言：默认中文(zh-cn)，第二语言英文(en)，后续可继续扩展
 # ============================================================
-baseURL: "https://adcwb.github.io/new-docs/"
+baseURL: "https://new-docs-3gq.pages.dev/"
 
 # --- 多语言 ---
 defaultContentLanguage: zh-cn
