@@ -1,3 +1,38 @@
+{{- /* Language auto-detection: redirect first-time visitors based on browser language.
+     Uses localStorage key 'blog-lang-init' to track whether auto-redirect has run.
+     Manual language switching via Hextra's switcher updates 'blog-lang-pref' so the
+     redirect respects user's explicit choice on subsequent root visits. */ -}}
+<script>
+(function () {
+  var INIT_KEY = 'blog-lang-init';
+  var PREF_KEY = 'blog-lang-pref';
+  var path = window.location.pathname;
+  var isEn = path === '/en/' || path.startsWith('/en/');
+
+  // Record explicit language choice whenever user is NOT on root
+  if (path !== '/') {
+    localStorage.setItem(PREF_KEY, isEn ? 'en' : 'zh');
+    return;
+  }
+
+  // On root '/': check for explicit preference first
+  var pref = localStorage.getItem(PREF_KEY);
+  if (pref === 'en') { window.location.replace('/en/'); return; }
+  if (pref === 'zh') { return; }
+
+  // No explicit preference — auto-detect on first visit only
+  if (localStorage.getItem(INIT_KEY)) { return; }
+  localStorage.setItem(INIT_KEY, '1');
+  var lang = (navigator.language || navigator.userLanguage || 'zh').toLowerCase();
+  if (!lang.startsWith('zh')) {
+    localStorage.setItem(PREF_KEY, 'en');
+    window.location.replace('/en/');
+  } else {
+    localStorage.setItem(PREF_KEY, 'zh');
+  }
+})();
+</script>
+
 {{- /* Knowledge Atlas — preload self-hosted Latin webfonts (Inter body,
        JetBrains Mono code/labels, Space Grotesk display). Files live in
        /static/fonts, served at /fonts/...; @font-face is in assets/css/custom.css.
