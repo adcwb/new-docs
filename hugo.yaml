@@ -34,7 +34,9 @@ markup:
 
 # --- 全局参数 ---
 params:
-  author: "adcwb"
+  author:
+    name: "adcwb"
+    email: ""
   description: "个人技术知识库，涵盖软件开发（Python / Go / Rust）、Linux 系统管理、网络安全与人工智能实践笔记"
   # KaTeX / MathJax 数学公式渲染
   math:
