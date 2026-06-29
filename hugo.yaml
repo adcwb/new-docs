@@ -67,8 +67,8 @@ params:
   dateFormat: "2006-01-02"
   # “编辑此页”链接
   editURL:
-    enable: true
-    base: “https://github.com/adcwb/new-docs/edit/master/content”
+    enable: false
+    base: https://github.com/adcwb/new-docs/edit/master/content
 
 # ============================================================
 # 各语言的标题与导航菜单
